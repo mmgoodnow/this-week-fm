@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LastService } from "../last.service";
 
 @Component({
 	selector: "app-week",
@@ -6,7 +7,11 @@ import { Component, OnInit } from "@angular/core";
 	styleUrls: ["./week.component.css"],
 })
 export class WeekComponent implements OnInit {
-	constructor() {}
+	constructor(private service: LastService) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.service
+			.getThisWeekTracks("mmgoodnow")
+			.then(tracks => console.log(tracks));
+	}
 }
