@@ -1,5 +1,7 @@
-<form (keyup.enter)=submit() class="form-signin">
+<div class=contain>
+	<form (keyup.enter)=submit() class="form-signin">
 		<h1 class="h3 mb-3 font-weight-normal">Please enter your Last.fm username.</h1>
 		<input [(ngModel)]="username" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" autofocus>
 		<a routerLink="/user/{{username}}" class="btn btn-lg btn-success btn-block mt-2">Compete</a>
-	  </form>
+	</form>
+</div>

@@ -1,12 +1,14 @@
-<table *ngIf="filled >= friends.length; else loading">
-	<tbody>
-		<tr *ngFor="let friend of sortedFriends">
-			<td>{{friend.name}}</td>
-			<td>{{friend.thisWeekTracks}}</td>
-		</tr>
-	</tbody>
-</table>
-
+<div class="container">
+	<h1>Race for this.week</h1>
+	<table *ngIf="filled >= friends.length; else loading">
+		<tbody>
+			<tr *ngFor="let friend of sortedFriends">
+				<td>{{friend.name}}</td>
+				<td><strong>{{friend.thisWeekTracks}}</strong></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 <ng-template #loading>
 	Loading&hellip;
 </ng-template>
