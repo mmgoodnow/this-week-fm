@@ -27,9 +27,9 @@ export class LastService {
 			api_key: apikey,
 			format: "json",
 		};
-		return fetch(url + this.queryString(request)).then(response =>
-			response.json()
-		);
+		return fetch(url + this.queryString(request))
+			.then(response => response.json())
+			.catch(() => this.getThisWeekTracks(user, from, to));
 	}
 
 	getFriends(user) {
@@ -39,9 +39,9 @@ export class LastService {
 			api_key: apikey,
 			format: "json",
 		};
-		return fetch(url + this.queryString(request)).then(response =>
-			response.json()
-		);
+		return fetch(url + this.queryString(request))
+			.then(response => response.json())
+			.catch(() => this.getFriends(user));
 	}
 
 	getInfo(user) {
@@ -51,8 +51,8 @@ export class LastService {
 			api_key: apikey,
 			format: "json",
 		};
-		return fetch(url + this.queryString(request)).then(response =>
-			response.json()
-		);
+		return fetch(url + this.queryString(request))
+			.then(response => response.json())
+			.catch(() => this.getInfo(user));
 	}
 }

@@ -1,4 +1,4 @@
-<table *ngIf="filled === friends.length">
+<table *ngIf="filled >= friends.length">
 	<tbody>
 		<tr *ngFor="let friend of sortedFriends">
 			<td>{{friend.name}}</td>
