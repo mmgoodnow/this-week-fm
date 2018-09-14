@@ -32,7 +32,6 @@ export class WeekComponent implements OnInit {
 		lastFriday.setMinutes(0);
 		lastFriday.setSeconds(0);
 		lastFriday.setMilliseconds(0);
-		lastFriday.setDate(-7);
 		console.log(lastFriday);
 		return lastFriday;
 	}
