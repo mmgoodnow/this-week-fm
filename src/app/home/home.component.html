@@ -1,3 +1,8 @@
-<p>
-	home works!
-</p>
+<form>
+	<label for="userfield">
+		Enter your username:
+	</label>
+	<input [(ngModel)]="username" id="userfield" name="userfield">
+	<br/>
+	<a routerLink="/user/{{username}}"><button>Compete</button></a>
+</form>

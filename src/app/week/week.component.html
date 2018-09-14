@@ -1,3 +1,8 @@
-<div *ngFor="let friend of sortedFriends">
-	{{friend.name}} {{friend.thisWeekTracks}}
-</div>
+<table *ngIf="filled === friends.length">
+	<tbody>
+		<tr *ngFor="let friend of sortedFriends">
+			<td>{{friend.name}}</td>
+			<td>{{friend.thisWeekTracks}}</td>
+		</tr>
+	</tbody>
+</table>

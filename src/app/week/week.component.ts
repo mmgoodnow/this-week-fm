@@ -15,6 +15,7 @@ export class WeekComponent implements OnInit {
 
 	user: any;
 	friends: any[];
+	filled: number;
 
 	ngOnInit() {}
 
@@ -32,22 +33,23 @@ export class WeekComponent implements OnInit {
 		lastFriday.setMinutes(0);
 		lastFriday.setSeconds(0);
 		lastFriday.setMilliseconds(0);
-		console.log(lastFriday);
 		return lastFriday;
 	}
 
 	public get sortedFriends(): any[] {
-		this.friends.sort((a, b) => b.thisWeekTracks - a.thisWeekTracks);
+		if (this.filled === this.friends.length && this.filled !== 0) {
+			this.friends.sort((a, b) => b.thisWeekTracks - a.thisWeekTracks);
+			this.filled++;
+		}
 		return this.friends;
 	}
 
 	private loadUsers() {
 		this.friends = [];
-
+		this.filled = 0;
 		this.service
 			.getInfo(this.user)
 			.then(res => {
-				console.log(res);
 				this.user = res.user;
 				this.friends.push(res.user);
 			})
@@ -55,13 +57,10 @@ export class WeekComponent implements OnInit {
 				this.service
 					.getFriends(this.user.name)
 					.then(res => {
-						console.log(res);
 						this.friends.push(...res.friends.user);
 					})
-					.then(() => {
-						for (let i = 0; i < this.friends.length; i++) {
-							const arr = this.friends;
-							const user = arr[i];
+					.then(() =>
+						this.friends.forEach((user, i, arr) =>
 							this.service
 								.getThisWeekTracks(
 									user.name,
@@ -72,9 +71,10 @@ export class WeekComponent implements OnInit {
 									user.thisWeekTracks = Number(
 										res.recenttracks["@attr"].total
 									);
-								});
-						}
-					})
+									this.filled++;
+								})
+						)
+					)
 			);
 	}
 }

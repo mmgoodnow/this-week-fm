@@ -20,6 +20,7 @@ export class LastService {
 	getThisWeekTracks(user, from: Date, to: Date) {
 		const request = {
 			method: "user.getrecenttracks",
+			limit: 1,
 			user: user,
 			from: Math.floor(from.valueOf() / 1000),
 			to: Math.floor(to.valueOf() / 1000),
