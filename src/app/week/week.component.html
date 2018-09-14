@@ -1,4 +1,4 @@
-<table *ngIf="filled >= friends.length">
+<table *ngIf="filled >= friends.length; else loading">
 	<tbody>
 		<tr *ngFor="let friend of sortedFriends">
 			<td>{{friend.name}}</td>
@@ -6,3 +6,7 @@
 		</tr>
 	</tbody>
 </table>
+
+<ng-template #loading>
+	Loading&hellip;
+</ng-template>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { LastService } from "../last.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
 	selector: "app-week",
