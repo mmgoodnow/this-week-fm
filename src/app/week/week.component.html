@@ -1,10 +1,16 @@
 <div class="container">
 	<h1>Race for this.week</h1>
+	<p>
+		<button class="btn btn-sm btn-primary" (click)="loadUsers()">Update</button>
+		Last updated: {{lastUpdated}}
+	</p>
 	<table *ngIf="filled >= friends.length; else loading">
 		<tbody>
 			<tr *ngFor="let friend of sortedFriends">
 				<td>{{friend.name}}</td>
-				<td><strong>{{friend.thisWeekTracks}}</strong></td>
+				<td>
+					<strong>{{friend.thisWeekTracks}}</strong>
+				</td>
 			</tr>
 		</tbody>
 	</table>

@@ -16,11 +16,13 @@ export class WeekComponent implements OnInit {
 	user: any;
 	friends: any[];
 	filled: number;
+	lastUpdated: string;
 
 	ngOnInit() {}
 
 	private setParams(params) {
-		this.user = params.userId;
+		this.user = {};
+		this.user.name = params.userId;
 		this.loadUsers();
 	}
 
@@ -47,8 +49,9 @@ export class WeekComponent implements OnInit {
 	private loadUsers() {
 		this.friends = [];
 		this.filled = 0;
+		this.lastUpdated = new Date().toString().substring(0, 21);
 		this.service
-			.getInfo(this.user)
+			.getInfo(this.user.name)
 			.then(res => {
 				this.user = res.user;
 				this.friends.push(res.user);
