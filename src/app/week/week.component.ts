@@ -46,7 +46,7 @@ export class WeekComponent implements OnInit {
 		return this.friends;
 	}
 
-	private loadUsers() {
+	loadUsers() {
 		this.friends = [];
 		this.filled = 0;
 		this.lastUpdated = new Date().toString().substring(0, 21);
