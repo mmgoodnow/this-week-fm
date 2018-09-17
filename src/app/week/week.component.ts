@@ -49,6 +49,8 @@ export class WeekComponent implements OnInit {
 	loadUsers() {
 		this.friends = [];
 		this.filled = 0;
+		const lastFriday = this.getLastFriday();
+		const now = new Date();
 		this.lastUpdated = new Date().toString().substring(0, 21);
 		this.service
 			.getInfo(this.user.name)
@@ -65,14 +67,16 @@ export class WeekComponent implements OnInit {
 					.then(() =>
 						this.friends.forEach((user, i, arr) =>
 							this.service
-								.getThisWeekTracks(
-									user.name,
-									this.getLastFriday(),
-									new Date()
-								)
+								.getThisWeekTracks(user.name, lastFriday, now)
 								.then(res => {
 									user.thisWeekTracks = Number(
 										res.recenttracks["@attr"].total
+									);
+									user.tracksPerDay = Math.round(
+										user.thisWeekTracks /
+											((now.valueOf() -
+												lastFriday.valueOf()) /
+												86400000)
 									);
 									this.filled++;
 								})

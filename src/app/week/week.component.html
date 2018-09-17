@@ -5,11 +5,21 @@
 		Last updated: {{lastUpdated}}
 	</p>
 	<table *ngIf="filled >= friends.length; else loading">
+		<thead>
+			<tr>
+				<th>User</th>
+				<th>Scrobbles</th>
+				<th>Scrobbles per day</th>
+			</tr>
+		</thead>
 		<tbody>
 			<tr *ngFor="let friend of sortedFriends">
 				<td>{{friend.name}}</td>
 				<td>
 					<strong>{{friend.thisWeekTracks}}</strong>
+				</td>
+				<td>
+					{{friend.tracksPerDay}}
 				</td>
 			</tr>
 		</tbody>
