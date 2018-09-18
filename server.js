@@ -1,9 +1,11 @@
 const express = require("express");
 const enforce = require("express-sslify");
+const compression = require("compression");
 const path = require("path");
 const app = express();
 
 // serve front end
+app.use(compression());
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(express.static("./dist/this-week-fm"));
 
