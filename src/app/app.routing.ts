@@ -11,6 +11,10 @@ const appRoutes: Routes = [
 		component: WeekComponent,
 	},
 	{
+		path: "user/:userId/:timeframe",
+		component: WeekComponent,
+	},
+	{
 		path: "**",
 		redirectTo: "",
 	},
