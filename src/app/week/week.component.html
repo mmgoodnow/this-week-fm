@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let friend of sortedFriends">
-				<td>{{friend.name}}</td>
+				<td><a routerLink="/user/{{friend.name}}" class="text-dark">{{friend.name}}</a></td>
 				<td>
 					<strong>{{friend.thisWeekTracks}}</strong>
 				</td>
