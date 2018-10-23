@@ -5,7 +5,7 @@
 		<a *ngIf=!currentWeek routerLink="/user/{{user.name}}/this-week">Click here for this.week</a>
 	</p>
 	<p *ngIf=currentWeek>
-		<button class="btn btn-sm btn-primary" (click)="reload()" (dblclick)="null" [disabled]="filled < friends.length || filled === 0">Update</button>
+		<button class="btn btn-sm btn-primary" (click)="reload()" [disabled]="filled < friends.length || filled === 0">Update</button>
 		Last updated: {{lastUpdated}}
 	</p>
 	<table *ngIf="filled >= friends.length; else loading">
