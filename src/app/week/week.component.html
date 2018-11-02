@@ -1,15 +1,29 @@
 <div class="container">
-	<h1>Race for this.week</h1>
+	<h1>Race for {{currentWeek ? "this" : "last"}}.week</h1>
 	<p>
-		<button class="btn btn-sm btn-primary" (click)="loadUsers()">Update</button>
+		<a *ngIf=currentWeek routerLink="/user/{{user.name}}/last-week">Click here for last.week</a>
+		<a *ngIf=!currentWeek routerLink="/user/{{user.name}}/this-week">Click here for this.week</a>
+	</p>
+	<p *ngIf=currentWeek>
+		<button class="btn btn-sm btn-primary" (click)="reload()" [disabled]="filled < friends.length || filled === 0">Update</button>
 		Last updated: {{lastUpdated}}
 	</p>
 	<table *ngIf="filled >= friends.length; else loading">
+		<thead>
+			<tr>
+				<th>User</th>
+				<th>Scrobbles</th>
+				<th>Scrobbles per day</th>
+			</tr>
+		</thead>
 		<tbody>
 			<tr *ngFor="let friend of sortedFriends">
-				<td>{{friend.name}}</td>
+				<td><a routerLink="/user/{{friend.name}}" class="text-dark">{{friend.name}}</a></td>
 				<td>
 					<strong>{{friend.thisWeekTracks}}</strong>
+				</td>
+				<td>
+					{{friend.tracksPerDay}}
 				</td>
 			</tr>
 		</tbody>

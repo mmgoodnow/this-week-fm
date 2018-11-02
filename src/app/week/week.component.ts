@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { LastService } from "../last.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
 	selector: "app-week",
@@ -8,7 +8,11 @@ import { ActivatedRoute } from "@angular/router";
 	styleUrls: ["./week.component.css"],
 })
 export class WeekComponent implements OnInit {
-	constructor(private service: LastService, private route: ActivatedRoute) {
+	constructor(
+		private service: LastService,
+		private route: ActivatedRoute,
+		private router: Router
+	) {
 		this.setParams = this.setParams.bind(this);
 		this.route.params.subscribe(params => this.setParams(params));
 	}
@@ -17,13 +21,25 @@ export class WeekComponent implements OnInit {
 	friends: any[];
 	filled: number;
 	lastUpdated: string;
+	currentWeek: boolean;
 
 	ngOnInit() {}
 
 	private setParams(params) {
 		this.user = {};
 		this.user.name = params.userId;
-		this.loadUsers();
+		if (params.timeframe) {
+			if (params.timeframe === "this-week") {
+				this.currentWeek = true;
+			} else if (params.timeframe === "last-week") {
+				this.currentWeek = false;
+			} else {
+				this.router.navigate(["user", this.user.name]);
+			}
+		} else {
+			this.currentWeek = true;
+		}
+		this.reload();
 	}
 
 	private getLastFriday(): Date {
@@ -46,7 +62,20 @@ export class WeekComponent implements OnInit {
 		return this.friends;
 	}
 
-	loadUsers() {
+	reload() {
+		if (this.currentWeek) {
+			const from = this.getLastFriday();
+			const to = new Date();
+			this.loadUsers(from, to);
+		} else {
+			const to = this.getLastFriday();
+			const from = this.getLastFriday();
+			from.setDate(to.getDate() - 7);
+			this.loadUsers(from, to);
+		}
+	}
+
+	loadUsers(from: Date, to: Date) {
 		this.friends = [];
 		this.filled = 0;
 		this.lastUpdated = new Date().toString().substring(0, 21);
@@ -65,14 +94,15 @@ export class WeekComponent implements OnInit {
 					.then(() =>
 						this.friends.forEach((user, i, arr) =>
 							this.service
-								.getThisWeekTracks(
-									user.name,
-									this.getLastFriday(),
-									new Date()
-								)
+								.getThisWeekTracks(user.name, from, to)
 								.then(res => {
 									user.thisWeekTracks = Number(
 										res.recenttracks["@attr"].total
+									);
+									user.tracksPerDay = Math.round(
+										user.thisWeekTracks /
+											((to.valueOf() - from.valueOf()) /
+												86400000)
 									);
 									this.filled++;
 								})
