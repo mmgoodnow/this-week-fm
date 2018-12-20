@@ -86,7 +86,7 @@ export class WeekComponent implements OnInit {
 			.then(res => {
 				if (res.error) {
 					alert("Username not found.");
-					this.router.navigate(["/home"]);
+					this.router.navigate(["/"]);
 					return;
 				}
 				this.user = res.user;
