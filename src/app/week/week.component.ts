@@ -57,6 +57,8 @@ export class WeekComponent implements OnInit {
 	public get sortedFriends(): any[] {
 		if (this.filled === this.friends.length && this.filled !== 0) {
 			this.friends.sort((a, b) => b.thisWeekTracks - a.thisWeekTracks);
+
+			// increase filled one more time to prevent resorting on every update
 			this.filled++;
 		}
 		return this.friends;
@@ -82,6 +84,11 @@ export class WeekComponent implements OnInit {
 		this.service
 			.getInfo(this.user.name)
 			.then(res => {
+				if (res.error) {
+					alert("Username not found.");
+					this.router.navigate(["/home"]);
+					return;
+				}
 				this.user = res.user;
 				this.friends.push(res.user);
 			})
@@ -89,7 +96,9 @@ export class WeekComponent implements OnInit {
 				this.service
 					.getFriends(this.user.name)
 					.then(res => {
-						this.friends.push(...res.friends.user);
+						if (res.friends) {
+							this.friends.push(...res.friends.user);
+						}
 					})
 					.then(() =>
 						this.friends.forEach((user, i, arr) =>
