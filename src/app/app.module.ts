@@ -5,9 +5,10 @@ import { HomeComponent } from "./home/home.component";
 import { WeekComponent } from "./week/week.component";
 import { routing } from "./app.routing";
 import { FormsModule } from "@angular/forms";
+import { TableComponent } from "./table/table.component";
 
 @NgModule({
-	declarations: [AppComponent, HomeComponent, WeekComponent],
+	declarations: [AppComponent, HomeComponent, WeekComponent, TableComponent],
 	imports: [BrowserModule, FormsModule, routing],
 	providers: [],
 	bootstrap: [AppComponent],
