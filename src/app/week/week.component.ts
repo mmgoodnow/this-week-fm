@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { LastService } from "../last.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Friend, IntervalTracks, User } from "../models";
+import Utils from "../Utils";
 
 @Component({
 	selector: "app-week",
@@ -17,32 +19,13 @@ export class WeekComponent implements OnInit {
 		this.route.params.subscribe(params => this.setParams(params));
 	}
 
-	user: any;
-	friends: any[];
-	filled: number;
+	user: User;
+	friends: Friend[];
+	filled: boolean;
 	lastUpdated: string;
 	currentWeek: boolean;
 
-	ngOnInit() {}
-
-	private setParams(params) {
-		this.user = {};
-		this.user.name = params.userId;
-		if (params.timeframe) {
-			if (params.timeframe === "this-week") {
-				this.currentWeek = true;
-			} else if (params.timeframe === "last-week") {
-				this.currentWeek = false;
-			} else {
-				this.router.navigate(["user", this.user.name]);
-			}
-		} else {
-			this.currentWeek = true;
-		}
-		this.reload();
-	}
-
-	private getLastFriday(): Date {
+	private static getLastFriday(): Date {
 		const now = new Date();
 		const diff = (7 - 5 + now.getDay()) % 7;
 		const lastFriday = new Date();
@@ -54,24 +37,32 @@ export class WeekComponent implements OnInit {
 		return lastFriday;
 	}
 
-	public get sortedFriends(): any[] {
-		if (this.filled === this.friends.length && this.filled !== 0) {
-			this.friends.sort((a, b) => b.thisWeekTracks - a.thisWeekTracks);
+	ngOnInit() {}
 
-			// increase filled one more time to prevent resorting on every update
-			this.filled++;
+	private setParams(params) {
+		this.user = new User(params.userId);
+		if (params.timeframe) {
+			if (params.timeframe === "this-week") {
+				this.currentWeek = true;
+			} else if (params.timeframe === "last-week") {
+				this.currentWeek = false;
+			} else {
+				this.router.navigate(["user", this.user.username]);
+			}
+		} else {
+			this.currentWeek = true;
 		}
-		return this.friends;
+		this.reload();
 	}
 
 	reload() {
 		if (this.currentWeek) {
-			const from = this.getLastFriday();
+			const from = WeekComponent.getLastFriday();
 			const to = new Date();
 			this.loadUsers(from, to);
 		} else {
-			const to = this.getLastFriday();
-			const from = this.getLastFriday();
+			const to = WeekComponent.getLastFriday();
+			const from = WeekComponent.getLastFriday();
 			from.setDate(to.getDate() - 7);
 			this.loadUsers(from, to);
 		}
@@ -79,44 +70,45 @@ export class WeekComponent implements OnInit {
 
 	loadUsers(from: Date, to: Date) {
 		this.friends = [];
-		this.filled = 0;
+		this.filled = false;
 		this.lastUpdated = new Date().toString().substring(0, 21);
+		this.friends.push(this.user.reset());
+		let promises: Promise<IntervalTracks>[] = [];
 		this.service
-			.getInfo(this.user.name)
-			.then(res => {
-				if (res.error) {
-					alert("Username not found.");
-					this.router.navigate(["/"]);
-					return;
+			.getFriends(this.user.username)
+			.then((friends: Friend[]) => {
+				if (!friends) {
+					throw new Error("Username not found.");
 				}
-				this.user = res.user;
-				this.friends.push(res.user);
+				this.friends.push(...friends);
 			})
-			.then(() =>
-				this.service
-					.getFriends(this.user.name)
-					.then(res => {
-						if (res.friends) {
-							this.friends.push(...res.friends.user);
-						}
-					})
-					.then(() =>
-						this.friends.forEach((user, i, arr) =>
-							this.service
-								.getThisWeekTracks(user.name, from, to)
-								.then(res => {
-									user.thisWeekTracks = Number(
-										res.recenttracks["@attr"].total
-									);
-									user.tracksPerDay = Math.round(
-										user.thisWeekTracks /
-											((to.valueOf() - from.valueOf()) /
-												86400000)
-									);
-									this.filled++;
-								})
-						)
-					)
-			);
+			.then(
+				() =>
+					(promises = this.friends.map((user: Friend) =>
+						this.service.getTracks(user.username, from, to)
+					))
+			)
+			.then(() => {
+				Promise.all(promises).then(responses => {
+					responses.forEach((tracks: IntervalTracks, i) => {
+						const currentFriend: Friend = this.friends[i];
+						Object.assign(currentFriend, tracks);
+						currentFriend.tracksPerDay = Math.round(
+							currentFriend.tracks /
+								((to.valueOf() - from.valueOf()) / 86400000)
+						);
+					});
+					this.friends.sort((a, b) => b.tracks - a.tracks);
+					this.filled = true;
+				});
+			})
+			.catch((error: Error) => {
+				alert(error.message);
+				if (error.message === "Username not found.") {
+					return this.router.navigate(["/"]);
+				}
+				this.filled = true;
+			})
+			.catch(Utils.handleErrors);
 	}
 }

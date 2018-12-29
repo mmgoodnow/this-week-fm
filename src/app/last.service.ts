@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { apikey, url } from "./constants";
+import { Friend, IntervalTracks, Track, User } from "./models";
 
 @Injectable({
 	providedIn: "root",
@@ -17,7 +18,7 @@ export class LastService {
 		);
 	}
 
-	getThisWeekTracks(user, from: Date, to: Date) {
+	getTracks(user, from: Date, to: Date): Promise<IntervalTracks> {
 		const request = {
 			method: "user.getrecenttracks",
 			limit: 1,
@@ -29,22 +30,52 @@ export class LastService {
 		};
 		return fetch(url + this.queryString(request))
 			.then(response => response.json())
-			.catch(() => this.getThisWeekTracks(user, from, to));
+			.then(json => {
+				if (json.recenttracks.track.length === 0) {
+					return { tracks: 0 };
+				}
+				const track = json.recenttracks.track[0];
+				let date;
+				const nowPlaying =
+					track.hasOwnProperty("@attr") && track["@attr"].nowplaying;
+				if (!nowPlaying) {
+					date = new Date(track.date.uts * 1000);
+				}
+				const tracks = json.recenttracks["@attr"].total;
+				return {
+					tracks,
+					latestTrack: new Track(
+						track.artist["#text"],
+						track.name,
+						nowPlaying,
+						date
+					),
+				};
+			});
 	}
 
-	getFriends(user) {
+	getFriends(username): Promise<Array<Friend>> {
 		const request = {
 			method: "user.getFriends",
-			user: user,
+			user: username,
 			api_key: apikey,
 			format: "json",
 		};
 		return fetch(url + this.queryString(request))
 			.then(response => response.json())
-			.catch(() => this.getFriends(user));
+			.then(json => {
+				if (json.error) {
+					return null;
+				}
+				if (json.friends) {
+					return json.friends.user.map(user => new Friend(user.name));
+				} else {
+					return [];
+				}
+			});
 	}
 
-	getInfo(user) {
+	getInfo(user): Promise<User> {
 		const request = {
 			method: "user.getInfo",
 			user: user,
@@ -53,6 +84,11 @@ export class LastService {
 		};
 		return fetch(url + this.queryString(request))
 			.then(response => response.json())
-			.catch(() => this.getInfo(user));
+			.then(json => {
+				if (json.error) {
+					return null;
+				}
+				return json.user.name;
+			});
 	}
 }

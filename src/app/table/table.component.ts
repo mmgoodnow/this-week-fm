@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { Friend } from "../models";
 
 @Component({
 	selector: "app-table",
@@ -6,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
 	styleUrls: ["./table.component.css"],
 })
 export class TableComponent implements OnInit {
-	constructor() {}
-
+	@Input()
+	friends: Friend[];
 	ngOnInit() {}
 }
