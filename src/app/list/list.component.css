@@ -1,5 +1,5 @@
 ul {
-	max-width: 22rem;
+	max-width: 25rem;
 }
 
 a.username {
@@ -33,8 +33,6 @@ a.ext-link.explr {
 
 .ellipsis {
 	text-overflow: ellipsis;
-
-	/* Required for text-overflow to do anything */
 	white-space: nowrap;
 	overflow: hidden;
 }

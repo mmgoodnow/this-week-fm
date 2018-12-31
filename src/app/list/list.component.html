@@ -1,8 +1,8 @@
 <ul class="list-group">
 	<li class="list-group-item" *ngFor="let friend of friends; let i = index">
 		<div class="flex-cont d-flex flex-column">
-			<div class="title mb-1 d-flex flex-row">
-				<div>
+			<div class="title mb-1 d-flex flex-row flex-wrap">
+				<div class="flex-shrink-0">
 					{{i + 1}}. <a routerLink="/user/{{friend.username}}" class="username">{{friend.username}}</a>&nbsp;
 					<span ngbTooltip="Currently listening"><fa *ngIf="friend.nowPlaying" name="play-circle"></fa></span>
 				</div>
