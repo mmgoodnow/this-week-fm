@@ -1,3 +1,5 @@
+import moment from "moment/src/moment";
+
 export default class Track {
 	artist: string;
 	name: string;
@@ -16,5 +18,9 @@ export default class Track {
 		if (date) {
 			this.date = date;
 		}
+	}
+
+	get dateRelStr(): string {
+		return moment(this.date).fromNow();
 	}
 }

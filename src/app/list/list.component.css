@@ -1,0 +1,40 @@
+ul {
+	max-width: 22rem;
+}
+
+a.username {
+	font-weight: bold;
+}
+
+a.ext-link {
+	border-radius: 4px;
+	background-size: contain;
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	margin: 0 1px;
+}
+a.ext-link.sergei {
+	background-image: url("../../assets/logos/sergei.png");
+}
+a.ext-link.lastfm {
+	background-image: url("../../assets/logos/lastfm.png");
+}
+a.ext-link.scatterfm {
+	border: 1px solid black;
+	background-image: url("../../assets/logos/scatterfm.png");
+}
+
+a.ext-link.explr {
+	border: 1px solid black;
+	background-image: url("../../assets/logos/explrfm.png");
+	background-size: cover;
+}
+
+.ellipsis {
+	text-overflow: ellipsis;
+
+	/* Required for text-overflow to do anything */
+	white-space: nowrap;
+	overflow: hidden;
+}

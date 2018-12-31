@@ -15,4 +15,15 @@ export default class Friend {
 	get nowPlaying(): boolean {
 		return this.latestTrack && this.latestTrack.nowPlaying;
 	}
+
+	get trackStr(): string {
+		if (!this.latestTrack) {
+			return "";
+		}
+		return this.latestTrack.artist + " - " + this.latestTrack.name;
+	}
+
+	get trackRelDate(): string {
+		return this.latestTrack.dateRelStr;
+	}
 }

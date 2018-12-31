@@ -1,0 +1,31 @@
+<ul class="list-group">
+	<li class="list-group-item" *ngFor="let friend of friends; let i = index">
+		<div class="flex-cont d-flex flex-column">
+			<div class="title mb-1 d-flex flex-row">
+				<div>
+					{{i + 1}}. <a routerLink="/user/{{friend.username}}" class="username">{{friend.username}}</a>&nbsp;
+					<span ngbTooltip="Currently listening"><fa *ngIf="friend.nowPlaying" name="play-circle"></fa></span>
+				</div>
+				<div class="flex-grow-1"></div>
+				<a href="https://www.last.fm/user/{{friend.username}}"
+				   class="ext-link lastfm" rel="noreferrer noopener" target="_blank" ngbTooltip="Last.fm"></a>
+				<a href="https://sergei.app/{{friend.username}}"
+				   class="ext-link sergei" rel="noreferrer noopener" target="_blank" ngbTooltip="SERGEI"></a>
+				<a href="https://scatterfm.markhansen.co.nz/graph.html#/user/{{friend.username}}"
+				   class="ext-link scatterfm" rel="noreferrer noopener" target="_blank" ngbTooltip="ScatterFM"></a>
+				<a href="http://explr.fm/?username={{friend.username}}"
+				   class="ext-link explr" rel="noreferrer noopener" target="_blank" ngbTooltip="Explr"></a>
+			</div>
+			<div class="text-right">
+				<strong>{{friend.tracks}}</strong> scrobbles ({{friend.tracksPerDay}} per day)
+			</div>
+			<div class="text-right ellipsis" *ngIf="friend.latestTrack">
+				{{friend.trackStr}}
+			</div>
+			<div class="text-right" *ngIf="friend.latestTrack">
+				{{friend.nowPlaying ? "Scrobbling now" : friend.trackRelDate}}
+			</div>
+		</div>
+	</li>
+
+</ul>

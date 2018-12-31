@@ -6,10 +6,25 @@ import { WeekComponent } from "./week/week.component";
 import { routing } from "./app.routing";
 import { FormsModule } from "@angular/forms";
 import { TableComponent } from "./table/table.component";
+import { ListComponent } from "./list/list.component";
+import { AngularFontAwesomeModule } from "angular-font-awesome";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
-	declarations: [AppComponent, HomeComponent, WeekComponent, TableComponent],
-	imports: [BrowserModule, FormsModule, routing],
+	declarations: [
+		AppComponent,
+		HomeComponent,
+		WeekComponent,
+		TableComponent,
+		ListComponent,
+	],
+	imports: [
+		BrowserModule,
+		FormsModule,
+		routing,
+		AngularFontAwesomeModule,
+		NgbModule,
+	],
 	providers: [],
 	bootstrap: [AppComponent],
 })

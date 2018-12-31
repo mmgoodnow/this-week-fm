@@ -2,12 +2,15 @@ import { Component, Input, OnInit } from "@angular/core";
 import Friend from "../models/Friend.model";
 
 @Component({
-	selector: "app-table",
-	templateUrl: "./table.component.html",
-	styleUrls: ["./table.component.css"],
+	selector: "app-list",
+	templateUrl: "./list.component.html",
+	styleUrls: ["./list.component.css"],
 })
-export class TableComponent implements OnInit {
+export class ListComponent implements OnInit {
 	@Input()
 	friends: Friend[];
+
+	constructor() {}
+
 	ngOnInit() {}
 }

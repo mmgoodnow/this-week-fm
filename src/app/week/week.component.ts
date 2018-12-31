@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { LastService } from "../last.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Friend, IntervalTracks, User } from "../models";
+import IntervalTracks from "../models/IntervalTracks.model";
 import Utils from "../Utils";
+import Friend from "../models/Friend.model";
+import User from "../models/User.model";
 
 @Component({
 	selector: "app-week",
