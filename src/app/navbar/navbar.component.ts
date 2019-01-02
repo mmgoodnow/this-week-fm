@@ -10,6 +10,7 @@ import { Subscription } from "rxjs";
 export class NavbarComponent implements OnInit, OnDestroy {
 	isCollapsed = true;
 	username: string;
+	activeLink: number;
 
 	private subscriptions: Subscription;
 
@@ -21,6 +22,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
 		this.subscriptions.add(
 			this.route.params.subscribe(this.setUsername.bind(this))
 		);
+		const href = window.location.href;
+		if (href.includes("/this/week")) {
+			this.select(0);
+		} else if (href.includes("/last/week")) {
+			this.select(1);
+		} else if (href.includes("/this/month")) {
+			this.select(2);
+		} else if (href.includes("/last/month")) {
+			this.select(3);
+		} else if (href.includes("/this/year")) {
+			this.select(4);
+		} else if (href.includes("/last/year")) {
+			this.select(5);
+		}
 	}
 
 	ngOnDestroy() {
@@ -29,5 +44,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
 	setUsername(params: any) {
 		this.username = params.username;
+	}
+
+	select(link): void {
+		this.activeLink = link;
 	}
 }
