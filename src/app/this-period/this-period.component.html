@@ -1,3 +1,7 @@
-<p>
-  this-period works!
-</p>
+<button class="btn btn-sm btn-outline-secondary" (click)="concise = !concise">Concise View</button>
+<button class="btn btn-sm btn-primary" (click)="reload()" [disabled]="!filled">Update</button>
+Last updated: {{lastUpdated}}
+<app-list *ngIf="filled; else loading" [friends]="friends" [concise]="concise"></app-list>
+<ng-template #loading>
+	Loading&hellip;
+</ng-template>

@@ -1,75 +1,37 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { LastService } from "../last.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import IntervalTracks from "../models/IntervalTracks.model";
-import Utils from "../Utils";
-import Friend from "../models/Friend.model";
-import User from "../models/User.model";
+import { Injectable, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import IntervalTracks from "../models/IntervalTracks.model";
+import Friend from "../models/Friend.model";
+import Utils from "../Utils";
+import User from "../models/User.model";
+import { LastService } from "../last.service";
+import { MainComponent } from "../main/main.component";
 
-@Component({
-	selector: "app-week",
-	templateUrl: "./week.component.html",
-	styleUrls: ["./week.component.css"],
-})
-export class WeekComponent implements OnInit, OnDestroy {
+@Injectable()
+export class PeriodBaseComponent implements OnInit {
+	private subscriptions: Subscription;
+
 	user: User;
 	friends: Friend[];
 	filled: boolean;
-	lastUpdated: string;
-	currentWeek: boolean;
-	concise: boolean;
-	subscriptions: Subscription;
+	username: string;
 
 	constructor(
 		private service: LastService,
-		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private parent: MainComponent
 	) {
 		this.subscriptions = new Subscription();
 	}
 
-	ngOnInit(): void {
-		this.route.params.subscribe(this.setParams.bind(this));
-	}
-
-	ngOnDestroy(): void {
-		this.subscriptions.unsubscribe();
-	}
-
-	private setParams(params) {
-		this.user = new User(params.userId);
-		if (params.timeframe) {
-			if (params.timeframe === "this-week") {
-				this.currentWeek = true;
-			} else if (params.timeframe === "last-week") {
-				this.currentWeek = false;
-			} else {
-				this.router.navigate(["user", this.user.username]);
-			}
-		} else {
-			this.currentWeek = true;
-		}
-		this.reload();
-	}
-
-	reload() {
-		if (this.currentWeek) {
-			const from = Utils.getLastFriday();
-			const to = new Date();
-			this.loadUsers(from, to);
-		} else {
-			const to = Utils.getLastFriday();
-			const from = Utils.getLastFriday();
-			from.setDate(to.getDate() - 7);
-			this.loadUsers(from, to);
-		}
+	ngOnInit() {
+		this.user = new User(this.parent.username);
 	}
 
 	loadUsers(from: Date, to: Date) {
 		this.friends = [];
 		this.filled = false;
-		this.lastUpdated = new Date().toString().substring(0, 21);
 		this.friends.push(this.user.reset());
 		let promises: Promise<IntervalTracks>[] = [];
 		this.service

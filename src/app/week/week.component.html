@@ -9,7 +9,7 @@
 		Last updated: {{lastUpdated}}
 	</p>
 	<app-table *ngIf="filled; else loading" [friends]="friends"></app-table>
-	<button class="btn btn-sm btn-outline-success" (click)="concise = !concise">Concise View</button>
+	<button class="btn btn-sm btn-outline-secondary" (click)="concise = !concise">Concise View</button>
 	<app-list *ngIf="filled; else loading" [friends]="friends" [concise]="concise"></app-list>
 </div>
 <ng-template #loading>
