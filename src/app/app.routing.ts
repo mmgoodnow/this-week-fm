@@ -5,7 +5,7 @@ import { ThisPeriodComponent } from "./this-period/this-period.component";
 import { LastPeriodComponent } from "./last-period/last-period.component";
 const appRoutes: Routes = [
 	{
-		path: "",
+		path: "home",
 		component: HomeComponent,
 	},
 	{
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
 	},
 	{
 		path: "**",
-		redirectTo: "",
+		redirectTo: "home",
 	},
 ];
 export const routing = RouterModule.forRoot(appRoutes);

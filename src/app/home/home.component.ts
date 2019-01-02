@@ -1,18 +1,34 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
 	selector: "app-home",
 	templateUrl: "./home.component.html",
 	styleUrls: ["./home.component.css"],
 })
-export class HomeComponent implements OnInit {
-	constructor(private router: Router) {}
-
+export class HomeComponent implements OnInit, OnDestroy {
 	username: string;
-	ngOnInit() {}
+	message: string;
+	subscription: Subscription;
 
-	submit() {
+	constructor(private router: Router, private route: ActivatedRoute) {}
+	ngOnInit(): void {
+		this.subscription = this.route.queryParams.subscribe(
+			this.retrieveMsg.bind(this)
+		);
+	}
+
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
+	}
+
+	retrieveMsg(params: Params): void {
+		this.message = params.message || null;
+		console.log(this.message);
+	}
+
+	submit(): void {
 		this.router.navigate(["user", this.username]);
 	}
 }

@@ -7,6 +7,7 @@ import Utils from "../Utils";
 import User from "../models/User.model";
 import { LastService } from "../last.service";
 import { MainComponent } from "../main/main.component";
+import { USER_NOT_FOUND } from "../constants";
 
 @Injectable()
 export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
@@ -64,7 +65,7 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 			.getFriends(this.user.username)
 			.then((friends: Friend[]) => {
 				if (!friends) {
-					throw new Error("Username not found.");
+					throw new Error(USER_NOT_FOUND);
 				}
 				this.friends.push(...friends);
 			})
@@ -94,11 +95,11 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 				});
 			})
 			.catch((error: Error) => {
-				alert(error.message);
-				if (error.message === "Username not found.") {
-					return this.router.navigate(["/"]);
+				if (error.message === USER_NOT_FOUND) {
+					return this.router.navigate(["/home"], {
+						queryParams: { message: USER_NOT_FOUND },
+					});
 				}
-				this.filled = true;
 			})
 			.catch(Utils.handleErrors);
 	}

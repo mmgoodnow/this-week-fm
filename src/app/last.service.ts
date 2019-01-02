@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { apikey, url } from "./constants";
+import { API_KEY, API_URL } from "./constants";
 import IntervalTracks from "./models/IntervalTracks.model";
 import Friend from "./models/Friend.model";
 import User from "./models/User.model";
@@ -28,10 +28,10 @@ export class LastService {
 			user: user,
 			from: Math.floor(from.valueOf() / 1000),
 			to: Math.floor(to.valueOf() / 1000),
-			api_key: apikey,
+			api_key: API_KEY,
 			format: "json",
 		};
-		return fetch(url + this.queryString(request))
+		return fetch(API_URL + this.queryString(request))
 			.then(response => response.json())
 			.then(json => {
 				if (json.recenttracks.track.length === 0) {
@@ -61,10 +61,10 @@ export class LastService {
 		const request = {
 			method: "user.getFriends",
 			user: username,
-			api_key: apikey,
+			api_key: API_KEY,
 			format: "json",
 		};
-		return fetch(url + this.queryString(request))
+		return fetch(API_URL + this.queryString(request))
 			.then(response => response.json())
 			.then(json => {
 				if (json.error) {
@@ -82,10 +82,10 @@ export class LastService {
 		const request = {
 			method: "user.getInfo",
 			user: user,
-			api_key: apikey,
+			api_key: API_KEY,
 			format: "json",
 		};
-		return fetch(url + this.queryString(request))
+		return fetch(API_URL + this.queryString(request))
 			.then(response => response.json())
 			.then(json => {
 				if (json.error) {
