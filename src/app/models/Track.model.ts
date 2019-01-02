@@ -1,4 +1,4 @@
-import moment from "moment/src/moment";
+import * as moment from "moment-mini";
 
 export default class Track {
 	artist: string;

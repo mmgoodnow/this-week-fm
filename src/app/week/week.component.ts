@@ -26,6 +26,7 @@ export class WeekComponent implements OnInit {
 	filled: boolean;
 	lastUpdated: string;
 	currentWeek: boolean;
+	concise: boolean;
 
 	private static getLastFriday(): Date {
 		const now = new Date();

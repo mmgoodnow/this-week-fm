@@ -1,0 +1,7 @@
+div.navbar-collapse {
+	flex-grow: 0;
+}
+
+nav {
+	justify-content: space-between;
+}

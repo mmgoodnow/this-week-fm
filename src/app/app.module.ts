@@ -9,6 +9,12 @@ import { TableComponent } from "./table/table.component";
 import { ListComponent } from "./list/list.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { Angular2CsvModule } from "angular2-csv";
+import { CsvComponent } from "./csv/csv.component";
+import { NavbarComponent } from "./navbar/navbar.component";
+import { MainComponent } from "./main/main.component";
+import { ThisPeriodComponent } from "./this-period/this-period.component";
+import { LastPeriodComponent } from "./last-period/last-period.component";
 
 @NgModule({
 	declarations: [
@@ -17,6 +23,11 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 		WeekComponent,
 		TableComponent,
 		ListComponent,
+		CsvComponent,
+		NavbarComponent,
+		MainComponent,
+		ThisPeriodComponent,
+		LastPeriodComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -24,6 +35,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 		routing,
 		AngularFontAwesomeModule,
 		NgbModule,
+		Angular2CsvModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

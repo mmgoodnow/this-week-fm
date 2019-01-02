@@ -10,6 +10,9 @@ export class ListComponent implements OnInit {
 	@Input()
 	friends: Friend[];
 
+	@Input()
+	concise: boolean;
+
 	constructor() {}
 
 	ngOnInit() {}

@@ -1,4 +1,4 @@
-<ul class="list-group">
+<ul *ngIf="!concise; else conciseView" class="list-group">
 	<li class="list-group-item" *ngFor="let friend of friends; let i = index">
 		<div class="flex-cont d-flex flex-column">
 			<div class="title mb-1 d-flex flex-row flex-wrap">
@@ -11,6 +11,8 @@
 				   class="ext-link lastfm" rel="noreferrer noopener" target="_blank" ngbTooltip="Last.fm"></a>
 				<a href="https://sergei.app/{{friend.username}}"
 				   class="ext-link sergei" rel="noreferrer noopener" target="_blank" ngbTooltip="SERGEI"></a>
+				<a href="http://lastmilestones.tk/milestones?user={{friend.username}}"
+				   class="ext-link milestones" rel="noreferrer noopener" target="_blank" ngbTooltip="LastMilestones"></a>
 				<a href="https://scatterfm.markhansen.co.nz/graph.html#/user/{{friend.username}}"
 				   class="ext-link scatterfm" rel="noreferrer noopener" target="_blank" ngbTooltip="ScatterFM"></a>
 				<a href="http://explr.fm/?username={{friend.username}}"
@@ -33,5 +35,23 @@
 			</div>
 		</div>
 	</li>
-
 </ul>
+
+<ng-template #conciseView>
+	<ul class="list-group">
+		<li class="list-group-item" *ngFor="let friend of friends; let i = index">
+			<div class="flex-cont d-flex flex-column">
+				<div class="title mb-1 d-flex flex-row flex-wrap">
+					<div class="flex-shrink-0">
+						{{i + 1}}. <a routerLink="/user/{{friend.username}}" class="username">{{friend.username}}</a>&nbsp;
+						<span ngbTooltip="Currently listening"><fa *ngIf="friend.nowPlaying" name="play-circle"></fa></span>
+					</div>
+					<div class="flex-grow-1"></div>
+					<div class="text-right" ngbTooltip="{{friend.tracksPerDay}} per day">
+						<strong>{{friend.tracks}}</strong>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</ng-template>

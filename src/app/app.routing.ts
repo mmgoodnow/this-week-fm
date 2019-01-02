@@ -1,6 +1,9 @@
 import { Routes, RouterModule } from "@angular/router";
 import { WeekComponent } from "./week/week.component";
 import { HomeComponent } from "./home/home.component";
+import { MainComponent } from "./main/main.component";
+import { ThisPeriodComponent } from "./this-period/this-period.component";
+import { LastPeriodComponent } from "./last-period/last-period.component";
 const appRoutes: Routes = [
 	{
 		path: "",
@@ -8,11 +11,21 @@ const appRoutes: Routes = [
 	},
 	{
 		path: "user/:userId",
-		component: WeekComponent,
+		redirectTo: "user/:userId/this/week",
 	},
 	{
-		path: "user/:userId/:timeframe",
-		component: WeekComponent,
+		path: "user/:userId",
+		component: MainComponent,
+		children: [
+			{
+				path: "this/:timeframe",
+				component: ThisPeriodComponent,
+			},
+			{
+				path: "last/:timeframe",
+				component: LastPeriodComponent,
+			},
+		],
 	},
 	{
 		path: "**",
