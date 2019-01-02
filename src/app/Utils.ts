@@ -18,14 +18,12 @@ export default class Utils {
 	static getFirstOfMonth(): Date {
 		const date = new Date();
 		const ret = new Date(date.getFullYear(), date.getMonth(), 1);
-		console.log(ret);
 		return ret;
 	}
 
 	static getFirstOfYear(): Date {
 		const date = new Date();
 		const ret = new Date(date.getFullYear(), 0, 1);
-		console.log(ret);
 		return ret;
 	}
 }

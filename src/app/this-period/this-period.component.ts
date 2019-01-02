@@ -24,8 +24,6 @@ export class ThisPeriodComponent extends PeriodBaseComponent {
 			case "year":
 				from = Utils.getFirstOfYear();
 				break;
-			default:
-				console.log(this.timeframe);
 		}
 		const to = new Date();
 		this.loadUsers(from, to);

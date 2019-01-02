@@ -15,6 +15,7 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 	user: User;
 	friends: Friend[];
 	filled: boolean;
+	numFilled: number;
 	timeframe: string;
 
 	constructor(
@@ -40,7 +41,6 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 	}
 
 	private setParams(params: Params): void {
-		console.log(params);
 		if (params.timeframe) {
 			this.timeframe = params.timeframe;
 		}
@@ -57,6 +57,7 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 	loadUsers(from: Date, to: Date) {
 		this.friends = [];
 		this.filled = false;
+		this.numFilled = 0;
 		this.friends.push(this.user.reset());
 		let promises: Promise<IntervalTracks>[] = [];
 		this.service
@@ -70,7 +71,12 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 			.then(
 				() =>
 					(promises = this.friends.map((user: Friend) =>
-						this.service.getTracks(user.username, from, to)
+						this.service
+							.getTracks(user.username, from, to)
+							.then((res: IntervalTracks) => {
+								this.numFilled++;
+								return res;
+							})
 					))
 			)
 			.then(() => {
