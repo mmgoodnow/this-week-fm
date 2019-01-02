@@ -7,18 +7,6 @@ import Friend from "../models/Friend.model";
 	styleUrls: ["./table.component.css"],
 })
 export class TableComponent implements OnInit {
-	options = {
-		fieldSeparator: ",",
-		quoteStrings: '"',
-		decimalseparator: ".",
-		showLabels: false,
-		headers: ["Username", "Tracks"],
-		showTitle: false,
-		useBom: false,
-		removeNewLines: true,
-		keys: ["username", "tracks"],
-	};
-
 	@Input()
 	friends: Friend[];
 

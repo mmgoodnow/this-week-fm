@@ -11,3 +11,7 @@ body {
 	white-space: nowrap;
 	overflow: hidden;
 }
+
+.max-30 {
+	max-width: 30rem;
+}

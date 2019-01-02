@@ -1,6 +1,6 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column max-30">
 	<span class="d-flex flex-row">
-		<button class="btn btn-sm btn-primary ellipsis mr-1" (click)="reload()" [disabled]="!filled">Last updated: {{lastUpdated}}</button>
+		<button class="btn btn-sm btn-primary ellipsis mr-1" (click)="reload()" [disabled]="!filled">Updated {{lastUpdated}}</button>
 		<button class="btn btn-sm btn-secondary" (click)="concise = !concise">{{concise ? "Expand" : "Collapse"}}</button>
 	</span>
 	<div class="my-1">

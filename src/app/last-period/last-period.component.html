@@ -1,0 +1,18 @@
+<div class="max-30">
+	<div class="d-sm-none my-1">
+		<app-list *ngIf="filled; else loading" [friends]="friends" [concise]="true"></app-list>
+	</div>
+	<div *ngIf="filled; else loading" class="d-none d-sm-block">
+		<app-csv class="csv" [data]="friends" [filename]="'last ' + timeframe" [options]="options">
+			<button class="btn btn-sm btn-primary">Download as CSV</button>
+		</app-csv>
+		<div class="my-1">
+			<app-table [friends]="friends"></app-table>
+		</div>
+	</div>
+</div>
+<ng-template #loading>
+	<ngb-progressbar type="success" [value]="numFilled" [max]="friends.length">
+		{{numFilled}} of {{friends.length}}
+	</ngb-progressbar>
+</ng-template>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PeriodBaseComponent } from "../period-base/period-base.component";
 import Utils from "../Utils";
+import * as moment from "moment-mini";
 
 @Component({
 	selector: "app-this-period",
@@ -8,7 +9,7 @@ import Utils from "../Utils";
 	styleUrls: ["./this-period.component.css"],
 })
 export class ThisPeriodComponent extends PeriodBaseComponent {
-	lastUpdated: string;
+	private _lastUpdated: Date;
 	concise = true;
 
 	reload(): void {
@@ -30,7 +31,11 @@ export class ThisPeriodComponent extends PeriodBaseComponent {
 	}
 
 	loadUsers(from: Date, to: Date) {
-		this.lastUpdated = new Date().toString().substring(0, 21);
+		this._lastUpdated = new Date();
 		super.loadUsers(from, to);
+	}
+
+	get lastUpdated(): string {
+		return moment(this._lastUpdated).fromNow();
 	}
 }
