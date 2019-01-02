@@ -1,5 +1,5 @@
-ul {
-	max-width: 25rem;
+li {
+	padding: 0.4rem 1.25rem;
 }
 
 a.username {
@@ -11,6 +11,7 @@ a.ext-link {
 	background-size: contain;
 	width: 24px;
 	height: 24px;
+	min-width: 24px;
 	display: inline-block;
 	margin: 0 1px;
 }
@@ -39,8 +40,10 @@ a.ext-link.milestones {
 	background-image: url("../../assets/logos/lastmilestones.png");
 }
 
-.ellipsis {
-	text-overflow: ellipsis;
-	white-space: nowrap;
+.overflow-hidden {
 	overflow: hidden;
+}
+
+.overflow-auto {
+	overflow: auto;
 }

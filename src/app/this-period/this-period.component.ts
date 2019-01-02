@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { PeriodBaseComponent } from "../period-base/period-base.component";
 import Utils from "../Utils";
 
@@ -7,18 +7,32 @@ import Utils from "../Utils";
 	templateUrl: "./this-period.component.html",
 	styleUrls: ["./this-period.component.css"],
 })
-export class ThisPeriodComponent extends PeriodBaseComponent implements OnInit {
+export class ThisPeriodComponent extends PeriodBaseComponent {
 	lastUpdated: string;
-	concise: boolean;
-
-	ngOnInit() {
-		super.ngOnInit();
-		this.reload();
-	}
+	concise = true;
 
 	reload(): void {
-		const from = Utils.getLastFriday();
+		let from: Date;
+
+		switch (this.timeframe) {
+			case "week":
+				from = Utils.getLastFriday();
+				break;
+			case "month":
+				from = Utils.getFirstOfMonth();
+				break;
+			case "year":
+				from = Utils.getFirstOfYear();
+				break;
+			default:
+				console.log(this.timeframe);
+		}
 		const to = new Date();
 		this.loadUsers(from, to);
+	}
+
+	loadUsers(from: Date, to: Date) {
+		this.lastUpdated = new Date().toString().substring(0, 21);
+		super.loadUsers(from, to);
 	}
 }

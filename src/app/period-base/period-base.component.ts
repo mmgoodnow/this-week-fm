@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Injectable, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import IntervalTracks from "../models/IntervalTracks.model";
 import Friend from "../models/Friend.model";
@@ -9,25 +9,50 @@ import { LastService } from "../last.service";
 import { MainComponent } from "../main/main.component";
 
 @Injectable()
-export class PeriodBaseComponent implements OnInit {
+export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 	private subscriptions: Subscription;
 
 	user: User;
 	friends: Friend[];
 	filled: boolean;
-	username: string;
+	timeframe: string;
 
 	constructor(
 		private service: LastService,
 		private router: Router,
+		private route: ActivatedRoute,
 		private parent: MainComponent
 	) {
 		this.subscriptions = new Subscription();
 	}
 
 	ngOnInit() {
-		this.user = new User(this.parent.username);
+		this.subscriptions.add(
+			this.parent.params.subscribe(this.setParams.bind(this))
+		);
+		this.subscriptions.add(
+			this.route.params.subscribe(this.setParams.bind(this))
+		);
 	}
+
+	ngOnDestroy(): void {
+		this.subscriptions.unsubscribe();
+	}
+
+	private setParams(params: Params): void {
+		console.log(params);
+		if (params.timeframe) {
+			this.timeframe = params.timeframe;
+		}
+		if (params.username) {
+			this.user = new User(params.username);
+		}
+		if (this.timeframe && this.user) {
+			this.reload();
+		}
+	}
+
+	abstract reload(): void;
 
 	loadUsers(from: Date, to: Date) {
 		this.friends = [];

@@ -1,0 +1,10 @@
+button {
+}
+
+span.d-flex.flex-row {
+	justify-content: space-between;
+}
+
+div.d-flex.flex-column {
+	max-width: 30rem;
+}

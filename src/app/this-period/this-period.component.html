@@ -1,7 +1,12 @@
-<button class="btn btn-sm btn-outline-secondary" (click)="concise = !concise">Concise View</button>
-<button class="btn btn-sm btn-primary" (click)="reload()" [disabled]="!filled">Update</button>
-Last updated: {{lastUpdated}}
-<app-list *ngIf="filled; else loading" [friends]="friends" [concise]="concise"></app-list>
+<div class="d-flex flex-column">
+	<span class="d-flex flex-row">
+		<button class="btn btn-sm btn-primary ellipsis mr-1" (click)="reload()" [disabled]="!filled">Last updated: {{lastUpdated}}</button>
+		<button class="btn btn-sm btn-secondary" (click)="concise = !concise">{{concise ? "Expand" : "Collapse"}}</button>
+	</span>
+	<div class="my-1">
+		<app-list *ngIf="filled; else loading" [friends]="friends" [concise]="concise"></app-list>
+	</div>
+</div>
 <ng-template #loading>
 	Loading&hellip;
 </ng-template>

@@ -5,3 +5,9 @@ html,
 body {
 	height: 100%;
 }
+
+.ellipsis {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
