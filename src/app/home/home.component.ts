@@ -24,8 +24,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	retrieveMsg(params: Params): void {
-		this.message = params.message || null;
-		console.log(this.message);
+		if (params.message) {
+			this.message = params.message;
+			this.router.navigate(["home"]);
+		}
 	}
 
 	submit(): void {

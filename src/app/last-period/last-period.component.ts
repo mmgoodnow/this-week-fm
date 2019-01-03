@@ -41,8 +41,6 @@ export class LastPeriodComponent extends PeriodBaseComponent {
 				from.setFullYear(to.getFullYear() - 1);
 				break;
 		}
-		console.log("from", from);
-		console.log("to", to);
 		this.loadUsers(from, to);
 	}
 }
