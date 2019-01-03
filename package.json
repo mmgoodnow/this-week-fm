@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
-		"build:prod": "ng build --aot --prod --deploy-url /this-week",
+		"buildRevProxy": "ng build --aot --prod --base-href /this-week/ --deploy-url /this-week/",
 		"postinstall": "ng build --aot --prod",
 		"precommit": "pretty-quick --staged",
 		"start": "node server.js",
