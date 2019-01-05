@@ -1,8 +1,8 @@
-<div class="max-30">
+<div *ngIf="filled; else loading" class="max-30">
 	<div class="d-sm-none my-1">
-		<app-list *ngIf="filled; else loading" [friends]="friends" [concise]="true"></app-list>
+		<app-list [friends]="friends" [concise]="true"></app-list>
 	</div>
-	<div *ngIf="filled; else loading" class="d-none d-sm-block">
+	<div class="d-none d-sm-block">
 		<app-csv class="csv" [data]="friends" [filename]="'last ' + timeframe" [options]="options">
 			<button class="btn btn-sm btn-primary">Download as CSV</button>
 		</app-csv>
