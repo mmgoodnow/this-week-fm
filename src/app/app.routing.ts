@@ -3,6 +3,7 @@ import { HomeComponent } from "./home/home.component";
 import { MainComponent } from "./main/main.component";
 import { ThisPeriodComponent } from "./this-period/this-period.component";
 import { LastPeriodComponent } from "./last-period/last-period.component";
+import { CustomPeriodComponent } from "./custom-period/custom-period.component";
 const appRoutes: Routes = [
 	{
 		path: "home",
@@ -19,6 +20,10 @@ const appRoutes: Routes = [
 			{
 				path: "last/:timeframe",
 				component: LastPeriodComponent,
+			},
+			{
+				path: "custom",
+				component: CustomPeriodComponent,
 			},
 			{
 				path: "",

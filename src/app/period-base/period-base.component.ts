@@ -25,6 +25,7 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private parent: MainComponent
 	) {
+		this.friends = [];
 		this.subscriptions = new Subscription();
 	}
 
@@ -41,7 +42,7 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 		this.subscriptions.unsubscribe();
 	}
 
-	private setParams(params: Params): void {
+	protected setParams(params: Params): void {
 		if (params.timeframe) {
 			this.timeframe = params.timeframe;
 		}

@@ -14,6 +14,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { MainComponent } from "./main/main.component";
 import { ThisPeriodComponent } from "./this-period/this-period.component";
 import { LastPeriodComponent } from "./last-period/last-period.component";
+import { CustomPeriodComponent } from "./custom-period/custom-period.component";
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import { LastPeriodComponent } from "./last-period/last-period.component";
 		MainComponent,
 		ThisPeriodComponent,
 		LastPeriodComponent,
+		CustomPeriodComponent,
 	],
 	imports: [
 		BrowserModule,
