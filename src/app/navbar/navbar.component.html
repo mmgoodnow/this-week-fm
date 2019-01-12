@@ -6,25 +6,25 @@
 		<div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="this/week">this.week</a>
+					<a class="nav-link" (click)="isCollapsed = true" routerLinkActive="active" routerLink="this/week">this.week</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="last/week">last.week</a>
+					<a class="nav-link" (click)="isCollapsed = true" routerLinkActive="active" routerLink="last/week">last.week</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="this/month">this.month</a>
+					<a class="nav-link" (click)="isCollapsed = true" routerLinkActive="active" routerLink="this/month">this.month</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="last/month">last.month</a>
+					<a class="nav-link" (click)="isCollapsed = true" routerLinkActive="active" routerLink="last/month">last.month</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="this/year">this.year</a>
+					<a class="nav-link" (click)="isCollapsed = true" routerLinkActive="active" routerLink="this/year">this.year</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="last/year">last.year</a>
+					<a class="nav-link" (click)="isCollapsed = true" routerLinkActive="active" routerLink="last/year">last.year</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="active" routerLink="custom">Custom</a>
+					<a class="nav-link" (click)="isCollapsed = true" routerLinkActive="active" routerLink="custom">Custom</a>
 				</li>
 			</ul>
 		</div>

@@ -19,7 +19,7 @@
 	</div>
 	<button class="btn btn-sm btn-primary my-1 ellipsis" (click)="reload()">Calculate</button>
 	<ng-container *ngIf="filled; else loading">
-		<div class="d-sm-none">
+		<div class="d-sm-none mb-1">
 			<app-list [friends]="friends" [concise]="true"></app-list>
 		</div>
 		<div class="d-none d-sm-block">
