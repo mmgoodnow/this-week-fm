@@ -34,7 +34,7 @@ export class LastService {
 		return fetch(API_URL + this.queryString(request))
 			.then(response => response.json())
 			.then(json => {
-				if (json.recenttracks.track.length === 0) {
+				if (json.recenttracks["total"] === 0) {
 					return { tracks: 0 };
 				}
 				const track = json.recenttracks.track[0];
