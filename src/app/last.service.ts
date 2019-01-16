@@ -37,10 +37,6 @@ export class LastService {
 				if (json.recenttracks["total"] === 0) {
 					return { tracks: 0 };
 				}
-				if (!(json.recenttracks.track instanceof Array)) {
-					json.recenttracks.track = [json.recenttracks.track];
-				}
-
 				const track = json.recenttracks.track[0];
 				let date;
 				const nowPlaying =
