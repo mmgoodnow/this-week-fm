@@ -4,6 +4,7 @@ import IntervalTracks from "./models/IntervalTracks.model";
 import Friend from "./models/Friend.model";
 import User from "./models/User.model";
 import Track from "./models/Track.model";
+import { Observable } from "rxjs";
 
 @Injectable({
 	providedIn: "root",
@@ -21,7 +22,7 @@ export class LastService {
 		);
 	}
 
-	getTracks(user, from: Date, to: Date): Promise<IntervalTracks> {
+	getTracks(user: string, from: Date, to: Date): Promise<IntervalTracks> {
 		const request = {
 			method: "user.getrecenttracks",
 			limit: 1,
@@ -55,6 +56,58 @@ export class LastService {
 					),
 				};
 			});
+	}
+
+	getAllScrobbles(
+		user: string,
+		from: Date,
+		to: Date,
+		total: number
+	): Promise<Array<Track>> {
+		const pages = Math.ceil(total / 200);
+		const request = {
+			method: "user.getrecenttracks",
+			limit: 200,
+			user: user,
+			from: Math.floor(from.valueOf() / 1000),
+			to: Math.floor(to.valueOf() / 1000),
+			api_key: API_KEY,
+			format: "json",
+			page: 0,
+		};
+
+		const promises = [];
+		for (let i = 1; i <= pages; i++) {
+			// increment page value
+			request.page = i;
+
+			const promise = fetch(API_URL + this.queryString(request))
+				.then(response => response.json())
+				.then(json => json.recenttracks.track)
+				.then(tracks => {
+					if (tracks.length === 0) {
+						return tracks;
+					} else if (
+						tracks[0].hasOwnProperty("@attr") &&
+						tracks[0]["@attr"].nowplaying === "true"
+					) {
+						tracks.shift();
+					}
+					return tracks.map(
+						track =>
+							new Track(
+								track.artist["#text"],
+								track.name,
+								false,
+								new Date(track.date.uts * 1000)
+							)
+					);
+				});
+			promises.push(promise);
+		}
+		return Promise.all(promises).then((arrays: Array<Array<Track>>) => {
+			return [].concat(...arrays);
+		});
 	}
 
 	getFriends(username): Promise<Array<Friend>> {

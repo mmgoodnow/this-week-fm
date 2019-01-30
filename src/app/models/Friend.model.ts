@@ -3,6 +3,7 @@ import Track from "./Track.model";
 export default class Friend {
 	username: string;
 	tracks: number;
+	allTracks: Track[];
 	tracksPerDay: number;
 	latestTrack: Track;
 

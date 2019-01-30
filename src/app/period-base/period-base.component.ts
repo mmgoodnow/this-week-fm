@@ -93,6 +93,16 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 					});
 					this.friends.sort((a, b) => b.tracks - a.tracks);
 					this.filled = true;
+					this.service
+						.getAllScrobbles(
+							this.user.username,
+							from,
+							to,
+							this.user.tracks
+						)
+						.then(scrobbles => {
+							console.log(scrobbles);
+						});
 				});
 			})
 			.catch((error: Error) => {
