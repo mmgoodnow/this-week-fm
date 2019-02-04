@@ -1,4 +1,5 @@
 <div class="d-flex flex-column max-30">
+	<app-chart [friends]="friends" *ngIf="allScrobblesDone"></app-chart>
 	<span class="d-flex flex-row">
 		<button class="btn btn-sm btn-primary ellipsis mr-1" (click)="reload()" [disabled]="!filled">Updated {{lastUpdated}}</button>
 		<button class="btn btn-sm btn-secondary" (click)="concise = !concise">{{concise ? "Expand" : "Collapse"}}</button>

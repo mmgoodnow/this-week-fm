@@ -34,10 +34,8 @@ export class CustomPeriodComponent extends PeriodBaseComponent {
 		const f = this.fromStr;
 		const t = this.toStr;
 
-		console.log(this.fromStr, this.toStr);
 		from = new Date(f.year, f.month - 1, f.day);
 		to = new Date(t.year, t.month - 1, t.day + 1);
-		console.log(from, to);
 		this.loadUsers(from, to);
 	}
 

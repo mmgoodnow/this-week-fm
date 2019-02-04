@@ -18,6 +18,7 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 	filled: boolean;
 	numFilled: number;
 	timeframe: string;
+	allScrobblesDone: boolean;
 
 	constructor(
 		private service: LastService,
@@ -93,16 +94,22 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 					});
 					this.friends.sort((a, b) => b.tracks - a.tracks);
 					this.filled = true;
-					this.service
-						.getAllScrobbles(
-							this.user.username,
-							from,
-							to,
-							this.user.tracks
-						)
-						.then(scrobbles => {
-							console.log(scrobbles);
-						});
+					const allScrobblesPromises = this.friends.map(
+						(user: Friend) =>
+							this.service
+								.getAllScrobbles(
+									user.username,
+									from,
+									to,
+									user.tracks
+								)
+								.then(scrobbles => {
+									user.allTracks = scrobbles;
+								})
+					);
+					Promise.all(allScrobblesPromises).then(
+						() => (this.allScrobblesDone = true)
+					);
 				});
 			})
 			.catch((error: Error) => {

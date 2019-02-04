@@ -15,6 +15,7 @@ import { MainComponent } from "./main/main.component";
 import { ThisPeriodComponent } from "./this-period/this-period.component";
 import { LastPeriodComponent } from "./last-period/last-period.component";
 import { CustomPeriodComponent } from "./custom-period/custom-period.component";
+import { ChartComponent } from "./chart/chart.component";
 
 @NgModule({
 	declarations: [
@@ -28,6 +29,7 @@ import { CustomPeriodComponent } from "./custom-period/custom-period.component";
 		ThisPeriodComponent,
 		LastPeriodComponent,
 		CustomPeriodComponent,
+		ChartComponent,
 	],
 	imports: [
 		BrowserModule,

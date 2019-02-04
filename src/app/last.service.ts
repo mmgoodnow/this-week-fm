@@ -80,7 +80,6 @@ export class LastService {
 		for (let i = 1; i <= pages; i++) {
 			// increment page value
 			request.page = i;
-
 			const promise = fetch(API_URL + this.queryString(request))
 				.then(response => response.json())
 				.then(json => json.recenttracks.track)
@@ -106,7 +105,7 @@ export class LastService {
 			promises.push(promise);
 		}
 		return Promise.all(promises).then((arrays: Array<Array<Track>>) => {
-			return [].concat(...arrays);
+			return [].concat(...arrays).reverse();
 		});
 	}
 

@@ -1,4 +1,5 @@
 import Track from "./Track.model";
+import { Point } from "chart.js";
 
 export default class Friend {
 	username: string;
@@ -26,5 +27,14 @@ export default class Friend {
 
 	get trackRelDate(): string {
 		return this.latestTrack.dateRelStr;
+	}
+
+	tracksAsPoints(): any[] {
+		const points = [];
+		for (let i = 0; i < this.allTracks.length; i++) {
+			const track = this.allTracks[i];
+			points.push({ t: track.date, y: i + 1 });
+		}
+		return points;
 	}
 }
