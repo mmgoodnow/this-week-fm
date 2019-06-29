@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { API_KEY, API_URL } from "./constants";
+import { API_KEY, API_URL, FRIENDS_URL } from "./constants";
 import IntervalTracks from "./models/IntervalTracks.model";
 import Friend from "./models/Friend.model";
 import User from "./models/User.model";
@@ -58,24 +58,9 @@ export class LastService {
 	}
 
 	getFriends(username): Promise<Array<Friend>> {
-		const request = {
-			method: "user.getFriends",
-			user: username,
-			api_key: API_KEY,
-			format: "json",
-		};
-		return fetch(API_URL + this.queryString(request))
+		return fetch(FRIENDS_URL + username)
 			.then(response => response.json())
-			.then(json => {
-				if (json.error) {
-					return null;
-				}
-				if (json.friends) {
-					return json.friends.user.map(user => new Friend(user.name));
-				} else {
-					return [];
-				}
-			});
+			.then(friends => friends.map(name => new Friend(name)));
 	}
 
 	getInfo(user): Promise<User> {
