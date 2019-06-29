@@ -31,10 +31,12 @@ export default class Friend {
 
 	tracksAsPoints(): any[] {
 		const points = [];
-		for (let i = 0; i < this.allTracks.length; i++) {
+		let i = 0;
+		for (; i < this.allTracks.length; i++) {
 			const track = this.allTracks[i];
 			points.push({ t: track.date, y: i + 1 });
 		}
+		points.push({ t: new Date(), y: i });
 		return points;
 	}
 }
