@@ -1,5 +1,11 @@
 import { Injectable } from "@angular/core";
-import { API_KEY, API_URL, FRIENDS_URL } from "./constants";
+import {
+	API_KEY,
+	API_URL,
+	GETFRIENDS_URL,
+	LAST_FM_DOWN,
+	USER_NOT_FOUND,
+} from "./constants";
 import IntervalTracks from "./models/IntervalTracks.model";
 import Friend from "./models/Friend.model";
 import User from "./models/User.model";
@@ -58,8 +64,12 @@ export class LastService {
 	}
 
 	getFriends(username): Promise<Array<Friend>> {
-		return fetch(FRIENDS_URL + username)
-			.then(response => response.json())
+		return fetch(GETFRIENDS_URL + username)
+			.then(response => {
+				if (response.status === 404) throw new Error(USER_NOT_FOUND);
+				if (response.status !== 200) throw new Error(LAST_FM_DOWN);
+				return response.json();
+			})
 			.then(friends => friends.map(name => new Friend(name)));
 	}
 

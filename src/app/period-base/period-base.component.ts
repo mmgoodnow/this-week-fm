@@ -100,7 +100,7 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 					return this.router.navigate(["/home"], {
 						queryParams: { message: USER_NOT_FOUND },
 					});
-				}
+				} else throw error;
 			})
 			.catch(Utils.handleErrors);
 	}
