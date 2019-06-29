@@ -26,4 +26,11 @@ export default class Utils {
 		const ret = new Date(date.getFullYear(), 0, 1);
 		return ret;
 	}
+
+	static fetch_retry(url, options, n) {
+		return fetch(url, options).catch(error => {
+			if (n === 1) throw error;
+			return Utils.fetch_retry(url, options, n - 1);
+		});
+	}
 }
