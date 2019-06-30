@@ -15,6 +15,8 @@ import { MainComponent } from "./main/main.component";
 import { ThisPeriodComponent } from "./this-period/this-period.component";
 import { LastPeriodComponent } from "./last-period/last-period.component";
 import { CustomPeriodComponent } from "./custom-period/custom-period.component";
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { environment } from "../environments/environment";
 
 @NgModule({
 	declarations: [
@@ -36,6 +38,9 @@ import { CustomPeriodComponent } from "./custom-period/custom-period.component";
 		AngularFontAwesomeModule,
 		NgbModule,
 		Angular2CsvModule,
+		ServiceWorkerModule.register("ngsw-worker.js", {
+			enabled: environment.production,
+		}),
 	],
 	providers: [],
 	bootstrap: [AppComponent],
