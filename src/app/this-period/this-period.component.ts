@@ -10,7 +10,7 @@ import * as moment from "moment-mini";
 })
 export class ThisPeriodComponent extends PeriodBaseComponent {
 	private _lastUpdated: Date;
-	concise = true;
+	concise = false;
 
 	reload(): void {
 		let from: Date;

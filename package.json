@@ -3,8 +3,8 @@
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
-		"buildRevProxy": "ng build --aot --prod --base-href /this-week/ --deploy-url /this-week/",
-		"heroku-postbuild": "ng build --aot --prod",
+		"buildRevProxy": "ng build --prod --base-href /this-week/ --deploy-url /this-week/",
+		"heroku-postbuild": "ng build --configuration=heroku",
 		"precommit": "pretty-quick --staged",
 		"start": "node server.js",
 		"build": "ng build",
