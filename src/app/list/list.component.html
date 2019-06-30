@@ -8,15 +8,15 @@
 				</div>
 				<div class="flex-grow-1"></div>
 				<div class="d-flex flex-row overflow-hidden">
-					<a href="https://www.last.fm/user/{{friend.username}}"
+					<a href="{{LAST_FM_USER_URL}}{{friend.username}}"
 					   class="ext-link lastfm" rel="noreferrer noopener" target="_blank" ngbTooltip="Last.fm"></a>
-					<a href="https://sergei.app/{{friend.username}}"
+					<a href="{{SERGEI_USER_URL}}{{friend.username}}"
 					   class="ext-link sergei" rel="noreferrer noopener" target="_blank" ngbTooltip="SERGEI"></a>
-					<a href="http://lastmilestones.tk/milestones?user={{friend.username}}"
+					<a href="{{LAST_MILESTONES_USER_URL}}{{friend.username}}"
 					   class="ext-link milestones" rel="noreferrer noopener" target="_blank" ngbTooltip="LastMilestones"></a>
-					<a href="https://scatterfm.markhansen.co.nz/graph.html#/user/{{friend.username}}"
+					<a href="{{SCATTER_FM_USER_URL}}{{friend.username}}"
 					   class="ext-link scatterfm" rel="noreferrer noopener" target="_blank" ngbTooltip="ScatterFM"></a>
-					<a href="http://explr.fm/?username={{friend.username}}"
+					<a href="{{EXPLR_FM_USER_URL}}{{friend.username}}"
 					   class="ext-link explr" rel="noreferrer noopener" target="_blank" ngbTooltip="Explr"></a>
 				</div>
 			</div>
