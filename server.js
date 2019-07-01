@@ -6,7 +6,7 @@ const backend = require("./src/backend");
 const app = express();
 
 app.use(compression());
-// app.use(enforce.HTTPS({ trustProtoHeader: true }));
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // serve back end
 backend(app);

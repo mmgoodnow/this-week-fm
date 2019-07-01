@@ -19,8 +19,12 @@
 						"polyfills": "src/polyfills.ts",
 						"tsConfig": "src/tsconfig.app.json",
 						"assets": [
-							"src/favicon.ico",
 							"src/assets",
+							{
+								"input": "src/assets/icons",
+								"glob": "*",
+								"output": "."
+							},
 							"src/manifest.webmanifest"
 						],
 						"styles": ["src/styles.css"],
@@ -95,8 +99,12 @@
 						"styles": ["src/styles.css"],
 						"scripts": [],
 						"assets": [
-							"src/favicon.ico",
 							"src/assets",
+							{
+								"input": "src/assets/icons",
+								"glob": "*",
+								"output": "."
+							},
 							"src/manifest.webmanifest"
 						]
 					}
