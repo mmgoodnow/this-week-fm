@@ -14,19 +14,24 @@ export class ThisPeriodComponent extends PeriodBaseComponent {
 
 	reload(): void {
 		let from: Date;
-
+		let to: Date;
 		switch (this.timeframe) {
 			case "week":
 				from = Utils.getLastFriday();
+				to = new Date(from);
+				to.setDate(from.getDate() + 7);
 				break;
 			case "month":
 				from = Utils.getFirstOfMonth();
+				to = new Date(from);
+				to.setMonth(from.getMonth() + 1);
 				break;
 			case "year":
 				from = Utils.getFirstOfYear();
+				to = new Date(from);
+				to.setFullYear(from.getFullYear() + 1);
 				break;
 		}
-		const to = new Date();
 		this.loadUsers(from, to);
 	}
 

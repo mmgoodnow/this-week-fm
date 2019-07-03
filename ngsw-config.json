@@ -20,5 +20,33 @@
 				]
 			}
 		}
+	],
+	"dataGroups": [
+		{
+			"name": "api-performance",
+			"urls": [
+				"/api/**",
+				"http://localhost:8080/api/**",
+				"https://this-week-fm.herokuapp.com/api/**",
+				"https://eeuf41qas2.execute-api.us-east-1.amazonaws.com/dev/api/**"
+			],
+			"cacheConfig": {
+				"strategy": "performance",
+				"maxSize": 100,
+				"maxAge": "3d"
+			}
+		},
+		{
+			"name": "api-freshness",
+			"urls": [
+				"https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks**"
+			],
+			"cacheConfig": {
+				"strategy": "freshness",
+				"maxSize": 100,
+				"maxAge": "3d",
+				"timeout": "3s"
+			}
+		}
 	]
 }
