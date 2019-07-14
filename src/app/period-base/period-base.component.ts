@@ -86,9 +86,13 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 					responses.forEach((tracks: IntervalTracks, i) => {
 						const currentFriend: Friend = this.friends[i];
 						Object.assign(currentFriend, tracks);
+						const toDateValue = Math.min(
+							to.valueOf(),
+							new Date().valueOf()
+						);
 						currentFriend.tracksPerDay = Math.round(
 							currentFriend.tracks /
-								((to.valueOf() - from.valueOf()) / 86400000)
+								((toDateValue - from.valueOf()) / 86400000)
 						);
 					});
 					this.friends.sort((a, b) => b.tracks - a.tracks);
