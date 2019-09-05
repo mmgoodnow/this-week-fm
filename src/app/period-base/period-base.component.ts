@@ -5,7 +5,7 @@ import IntervalTracks from "../models/IntervalTracks.model";
 import Friend from "../models/Friend.model";
 import Utils from "../Utils";
 import User from "../models/User.model";
-import { LastService } from "../last.service";
+import { LastService } from "../services/last.service";
 import { MainComponent } from "../main/main.component";
 import { USER_NOT_FOUND } from "../constants";
 

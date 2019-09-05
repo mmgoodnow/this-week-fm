@@ -5,11 +5,11 @@ import {
 	GETFRIENDS_URL,
 	LAST_FM_DOWN,
 	USER_NOT_FOUND,
-} from "./constants";
-import IntervalTracks from "./models/IntervalTracks.model";
-import Friend from "./models/Friend.model";
-import User from "./models/User.model";
-import Track from "./models/Track.model";
+} from "../constants";
+import IntervalTracks from "../models/IntervalTracks.model";
+import Friend from "../models/Friend.model";
+import User from "../models/User.model";
+import Track from "../models/Track.model";
 
 @Injectable({
 	providedIn: "root",
