@@ -5,7 +5,6 @@
 		"ng": "ng",
 		"buildRevProxy": "ng build --prod --base-href /this-week/ --deploy-url /this-week/",
 		"heroku-postbuild": "ng build --configuration=heroku",
-		"precommit": "pretty-quick --staged",
 		"start": "node server.js",
 		"build": "ng build",
 		"test": "ng test",
@@ -52,7 +51,7 @@
 		"@types/jasminewd2": "~2.0.3",
 		"@types/node": "~8.9.4",
 		"codelyzer": "^5.0.1",
-		"husky": "^0.14.3",
+		"husky": "^3.0.5",
 		"jasmine-core": "~2.99.1",
 		"jasmine-spec-reporter": "~4.2.1",
 		"karma": "^4.1.0",
@@ -60,6 +59,7 @@
 		"karma-coverage-istanbul-reporter": "~2.0.1",
 		"karma-jasmine": "~1.1.2",
 		"karma-jasmine-html-reporter": "^0.2.2",
+		"lint-staged": "^9.2.5",
 		"prettier": "^1.14.2",
 		"pretty-quick": "^1.6.0",
 		"protractor": "~5.4.0",
@@ -68,5 +68,20 @@
 		"tslint-config-prettier": "^1.18.0",
 		"tslint-plugin-prettier": "^2.0.1",
 		"typescript": "~3.4.5"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,ts,css,json,md,html}": [
+			"prettier --write",
+			"git add"
+		],
+		"*.{ts}": [
+			"tslint --fix",
+			"git add"
+		]
 	}
 }
