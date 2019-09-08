@@ -1,13 +1,12 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import IntervalTracks from "../models/IntervalTracks.model";
-import Friend from "../models/Friend.model";
-import Utils from "../Utils";
-import User from "../models/User.model";
-import { LastService } from "../services/last.service";
+import IntervalTracks from "../../models/IntervalTracks.model";
+import Friend from "../../models/Friend.model";
+import Utils from "../../lib/Utils";
+import User from "../../models/User.model";
+import { LastService } from "../../services/last.service";
 import { MainComponent } from "../main/main.component";
-import { USER_NOT_FOUND } from "../constants";
 
 @Injectable()
 export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
@@ -65,9 +64,6 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 		this.service
 			.getFriends(this.user.username)
 			.then((friends: Friend[]) => {
-				if (!friends) {
-					throw new Error(USER_NOT_FOUND);
-				}
 				this.friends.push(...friends);
 			})
 			.then(
@@ -98,13 +94,6 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 					this.friends.sort((a, b) => b.tracks - a.tracks);
 					this.filled = true;
 				});
-			})
-			.catch((error: Error) => {
-				if (error.message === USER_NOT_FOUND) {
-					return this.router.navigate(["/home"], {
-						queryParams: { message: USER_NOT_FOUND },
-					});
-				} else throw error;
 			})
 			.catch(Utils.handleErrors);
 	}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { PeriodBaseComponent } from "../period-base/period-base.component";
-import Utils from "../Utils";
+import Utils from "../../lib/Utils";
 import * as moment from "moment-mini";
 
 @Component({

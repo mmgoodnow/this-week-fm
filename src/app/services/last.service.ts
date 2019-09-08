@@ -4,25 +4,27 @@ import {
 	API_URL,
 	GETFRIENDS_URL,
 	LAST_FM_DOWN,
-	USER_NOT_FOUND,
-} from "../constants";
+} from "../lib/constants";
 import IntervalTracks from "../models/IntervalTracks.model";
 import Friend from "../models/Friend.model";
 import User from "../models/User.model";
 import Track from "../models/Track.model";
+import { Observable } from "rxjs";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { retry, retryWhen } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root",
 })
 export class LastService {
-	constructor() {}
+	constructor(private http: HttpClient) {}
 
 	private queryString(params): string {
 		const esc = encodeURIComponent;
 		return (
 			"?" +
 			Object.keys(params)
-				.map(k => esc(k) + "=" + esc(params[k]))
+				.map(k => `${esc(k)}=${esc(params[k])}`)
 				.join("&")
 		);
 	}
@@ -66,7 +68,7 @@ export class LastService {
 	getFriends(username): Promise<Array<Friend>> {
 		return fetch(GETFRIENDS_URL + username)
 			.then(response => {
-				if (response.status === 404) throw new Error(USER_NOT_FOUND);
+				// if (response.status === 404) throw new Error(USER_NOT_FOUND);
 				if (response.status !== 200) throw new Error(LAST_FM_DOWN);
 				return response.json();
 			})
@@ -88,5 +90,16 @@ export class LastService {
 				}
 				return json.user.name;
 			});
+	}
+
+	getFriendsRx(username) {
+		const request = {
+			method: "user.getFriends",
+			user: username,
+			api_key: API_KEY,
+			format: "json",
+		};
+		const params = new HttpParams({ fromObject: request });
+		return this.http.get(API_URL, { params }).pipe(retry(2));
 	}
 }

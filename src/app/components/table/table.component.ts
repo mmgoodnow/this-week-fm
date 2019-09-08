@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import Friend from "../models/Friend.model";
+import Friend from "../../models/Friend.model";
 
 @Component({
 	selector: "app-table",

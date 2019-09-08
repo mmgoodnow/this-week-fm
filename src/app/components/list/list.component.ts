@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from "@angular/core";
-import Friend from "../models/Friend.model";
+import Friend from "../../models/Friend.model";
 import {
 	EXPLR_FM_USER_URL,
 	LAST_FM_USER_URL,
 	SERGEI_USER_URL,
 	SCATTER_FM_USER_URL,
 	LAST_MILESTONES_USER_URL,
-} from "../constants";
+} from "../../lib/constants";
 
 @Component({
 	selector: "app-list",

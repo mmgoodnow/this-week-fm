@@ -61,6 +61,7 @@
 			"check-whitespace"
 		],
 		"prefer-const": true,
+		"prefer-template": [true, "allow-single-concat"],
 		"prettier": true,
 		"radix": true,
 		"semicolon": [true, "always"],

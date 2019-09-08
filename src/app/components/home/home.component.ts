@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { FriendsService } from "../../services/friends.service";
 
 @Component({
 	selector: "app-home",
@@ -12,11 +13,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 	message: string;
 	subscription: Subscription;
 
-	constructor(private router: Router, private route: ActivatedRoute) {}
+	constructor(
+		private router: Router,
+		private route: ActivatedRoute,
+		private friendService: FriendsService
+	) {}
 	ngOnInit(): void {
 		this.subscription = this.route.queryParams.subscribe(
 			this.retrieveMsg.bind(this)
 		);
+		this.friendService.getFriends("asontehusnth").subscribe(friends => {
+			console.log(friends);
+		});
 	}
 
 	ngOnDestroy(): void {

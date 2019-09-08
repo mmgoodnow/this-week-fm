@@ -17,27 +17,27 @@ a.ext-link {
 }
 
 a.ext-link.sergei {
-	background-image: url("../../assets/logos/sergei.png");
+	background-image: url("../../../assets/logos/sergei.png");
 }
 
 a.ext-link.lastfm {
-	background-image: url("../../assets/logos/lastfm.png");
+	background-image: url("../../../assets/logos/lastfm.png");
 }
 
 a.ext-link.scatterfm {
 	border: 1px solid black;
-	background-image: url("../../assets/logos/scatterfm.png");
+	background-image: url("../../../assets/logos/scatterfm.png");
 }
 
 a.ext-link.explr {
 	border: 1px solid black;
-	background-image: url("../../assets/logos/explrfm.png");
+	background-image: url("../../../assets/logos/explrfm.png");
 	background-size: cover;
 }
 
 a.ext-link.milestones {
 	border: 1px solid black;
-	background-image: url("../../assets/logos/lastmilestones.png");
+	background-image: url("../../../assets/logos/lastmilestones.png");
 }
 
 .overflow-hidden {

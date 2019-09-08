@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { PeriodBaseComponent } from "../period-base/period-base.component";
-import Utils from "../Utils";
+import Utils from "../../lib/Utils";
 import { Params } from "@angular/router";
-import User from "../models/User.model";
+import User from "../../models/User.model";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
