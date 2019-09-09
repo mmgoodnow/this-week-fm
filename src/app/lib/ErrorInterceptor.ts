@@ -11,27 +11,26 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { instanceOfLastFmError } from "../models/LastResponses";
 import { errorCodeToString } from "./transformations";
+import { statusCodeStartsWith } from "./utils";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-	_router: Router;
 	constructor(private router: Router) {
-		this._router = this.router;
 		this.handleError = this.handleError.bind(this);
 	}
 
-	handleError(error: HttpErrorResponse) {
-		console.log(error.error);
-		if (error.error instanceof ErrorEvent) {
-			console.error("An error occurred:", error.error.message);
-		} else if (instanceOfLastFmError(error.error)) {
-			this.router.navigate(["/home"], {
-				queryParams: { message: errorCodeToString(error.error) },
-			});
-			return;
+	handleError(error: HttpErrorResponse, caught: Observable<any>) {
+		console.log(caught);
+		if (
+			statusCodeStartsWith(error.status, 4) &&
+			instanceOfLastFmError(error.error)
+		) {
+			// this.router.navigate(["/home"], {
+			// 	queryParams: { error: errorCodeToString(error.error) },
+			// });
+			return caught;
 		}
-		// return an observable with a user-facing error message
-		return throwError(error.error);
+		return throwError(error);
 	}
 
 	intercept(

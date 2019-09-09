@@ -1,14 +1,28 @@
 <div class="d-flex flex-column max-30">
 	<span class="d-flex flex-row">
-		<button class="btn btn-sm btn-primary ellipsis mr-1" (click)="reload()" [disabled]="!filled">Updated {{lastUpdated}}</button>
-		<button class="btn btn-sm btn-secondary" (click)="concise = !concise">{{concise ? "Expand" : "Collapse"}}</button>
+		<button
+			class="btn btn-sm btn-primary ellipsis mr-1"
+			(click)="reload()"
+			[disabled]="!filled"
+		>
+			Updated {{ lastUpdated }}
+		</button>
+		<button class="btn btn-sm btn-secondary" (click)="concise = !concise">
+			{{ concise ? "Expand" : "Collapse" }}
+		</button>
 	</span>
 	<div class="my-1">
-		<app-list *ngIf="filled; else loading" [friends]="friends" [concise]="concise"></app-list>
+		<app-list
+			*ngIf="filled; else loading"
+			[friends]="friends"
+			[concise]="concise"
+			[from]="from"
+			[to]="to"
+		></app-list>
 	</div>
 </div>
 <ng-template #loading>
 	<ngb-progressbar type="success" [value]="numFilled" [max]="friends.length">
-		{{numFilled}} of {{friends.length}}
+		{{ numFilled }} of {{ friends.length }}
 	</ngb-progressbar>
 </ng-template>

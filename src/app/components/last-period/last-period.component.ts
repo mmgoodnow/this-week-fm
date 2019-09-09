@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { PeriodBaseComponent } from "../period-base/period-base.component";
-import Utils from "../../lib/Utils";
+import {
+	getFirstOfMonth,
+	getFirstOfYear,
+	getLastFriday,
+} from "../../lib/utils";
 
 @Component({
 	selector: "app-last-period",
@@ -20,27 +24,27 @@ export class LastPeriodComponent extends PeriodBaseComponent {
 		keys: ["username", "tracks"],
 	};
 
-	reload(): void {
-		let to: Date;
-		let from: Date;
+	to: Date;
+	from: Date;
 
+	reload(): void {
 		switch (this.timeframe) {
 			case "week":
-				to = Utils.getLastFriday();
-				from = new Date(to);
-				from.setDate(to.getDate() - 7);
+				this.to = getLastFriday();
+				this.from = new Date(this.to);
+				this.from.setDate(this.to.getDate() - 7);
 				break;
 			case "month":
-				to = Utils.getFirstOfMonth();
-				from = new Date(to);
-				from.setMonth(to.getMonth() - 1);
+				this.to = getFirstOfMonth();
+				this.from = new Date(this.to);
+				this.from.setMonth(this.to.getMonth() - 1);
 				break;
 			case "year":
-				to = Utils.getFirstOfYear();
-				from = new Date(to);
-				from.setFullYear(to.getFullYear() - 1);
+				this.to = getFirstOfYear();
+				this.from = new Date(this.to);
+				this.from.setFullYear(this.to.getFullYear() - 1);
 				break;
 		}
-		this.loadUsers(from, to);
+		this.loadUsers(this.from, this.to);
 	}
 }

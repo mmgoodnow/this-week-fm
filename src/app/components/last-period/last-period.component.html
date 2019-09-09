@@ -4,17 +4,26 @@
 			<app-list [friends]="friends" [concise]="true"></app-list>
 		</div>
 		<div class="d-none d-sm-block">
-			<app-csv class="csv" [data]="friends" [filename]="'last ' + timeframe" [options]="options">
+			<app-csv
+				class="csv"
+				[data]="friends"
+				[filename]="'last ' + timeframe"
+				[options]="options"
+			>
 				<button class="btn btn-sm btn-primary">Download as CSV</button>
 			</app-csv>
 			<div class="my-1">
-				<app-table [friends]="friends"></app-table>
+				<app-table
+					[friends]="friends"
+					[from]="from"
+					[to]="to"
+				></app-table>
 			</div>
 		</div>
 	</ng-container>
 </div>
 <ng-template #loading>
 	<ngb-progressbar type="success" [value]="numFilled" [max]="friends.length">
-		{{numFilled}} of {{friends.length}}
+		{{ numFilled }} of {{ friends.length }}
 	</ngb-progressbar>
 </ng-template>

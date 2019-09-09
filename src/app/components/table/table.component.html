@@ -1,20 +1,24 @@
 <table>
 	<thead>
-	<tr>
-		<th>User</th>
-		<th>Scrobbles</th>
-		<th>Scrobbles per day</th>
-	</tr>
+		<tr>
+			<th>User</th>
+			<th>Scrobbles</th>
+			<th>Scrobbles per day</th>
+		</tr>
 	</thead>
 	<tbody>
-	<tr *ngFor="let friend of friends">
-		<td><a routerLink="/user/{{friend.username}}" class="text-dark">{{friend.username}}</a></td>
-		<td>
-			<strong>{{friend.tracks}}</strong>
-		</td>
-		<td>
-			{{friend.tracksPerDay}}
-		</td>
-	</tr>
+		<tr *ngFor="let friend of friends | sort">
+			<td>
+				<a routerLink="/user/{{ friend.username }}" class="text-dark">{{
+					friend.username
+				}}</a>
+			</td>
+			<td>
+				<strong>{{ friend.tracks }}</strong>
+			</td>
+			<td>
+				{{ friend.tracks | tracksPerDay: from:to }}
+			</td>
+		</tr>
 	</tbody>
 </table>

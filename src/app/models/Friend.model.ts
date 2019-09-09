@@ -20,7 +20,7 @@ export default class Friend {
 		if (!this.latestTrack) {
 			return "";
 		}
-		return this.latestTrack.artist + " - " + this.latestTrack.name;
+		return `${this.latestTrack.artist} - ${this.latestTrack.name}`;
 	}
 
 	get trackRelDate(): string {

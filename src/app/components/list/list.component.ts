@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import Friend from "../../models/Friend.model";
 import {
 	EXPLR_FM_USER_URL,
@@ -13,12 +13,18 @@ import {
 	templateUrl: "./list.component.html",
 	styleUrls: ["./list.component.css"],
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 	@Input()
 	friends: Friend[];
 
 	@Input()
 	concise: boolean;
+
+	@Input()
+	from: Date;
+
+	@Input()
+	to: Date;
 
 	LAST_FM_USER_URL: string = LAST_FM_USER_URL;
 	EXPLR_FM_USER_URL: string = EXPLR_FM_USER_URL;
@@ -27,6 +33,4 @@ export class ListComponent implements OnInit {
 	SCATTER_FM_USER_URL: string = SCATTER_FM_USER_URL;
 
 	constructor() {}
-
-	ngOnInit() {}
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import IntervalTracks from "../../models/IntervalTracks.model";
 import Friend from "../../models/Friend.model";
-import Utils from "../../lib/Utils";
+import { alertError } from "../../lib/utils";
 import User from "../../models/User.model";
 import { LastService } from "../../services/last.service";
 import { MainComponent } from "../main/main.component";
@@ -95,6 +95,6 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 					this.filled = true;
 				});
 			})
-			.catch(Utils.handleErrors);
+			.catch(alertError);
 	}
 }

@@ -11,3 +11,5 @@ export const EXPLR_FM_USER_URL = "https://mold.github.io/explr/?username=";
 export const SERGEI_USER_URL = "https://sergei.app/";
 // prettier-ignore
 export const LAST_MILESTONES_USER_URL = "http://lastmilestones.tk/milestones?user=";
+
+export const MS_PER_DAY = 86400000;

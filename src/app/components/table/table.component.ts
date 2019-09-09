@@ -10,5 +10,11 @@ export class TableComponent implements OnInit {
 	@Input()
 	friends: Friend[];
 
+	@Input()
+	from: Date;
+
+	@Input()
+	to: Date;
+
 	ngOnInit() {}
 }

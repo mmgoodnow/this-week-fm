@@ -19,6 +19,8 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { ErrorInterceptor } from "./lib/ErrorInterceptor";
+import { SortPipe } from "./pipes/sort.pipe";
+import { TracksPerDayPipe } from "./pipes/tracks-per-day.pipe";
 
 @NgModule({
 	declarations: [
@@ -32,6 +34,8 @@ import { ErrorInterceptor } from "./lib/ErrorInterceptor";
 		ThisPeriodComponent,
 		LastPeriodComponent,
 		CustomPeriodComponent,
+		SortPipe,
+		TracksPerDayPipe,
 	],
 	imports: [
 		BrowserModule,

@@ -10,21 +10,18 @@ import { FriendsService } from "../../services/friends.service";
 })
 export class HomeComponent implements OnInit, OnDestroy {
 	username: string;
-	message: string;
+	error: string;
 	subscription: Subscription;
 
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private friendService: FriendsService
-	) {}
+	) {
+		this.retrieveMsg = this.retrieveMsg.bind(this);
+	}
 	ngOnInit(): void {
-		this.subscription = this.route.queryParams.subscribe(
-			this.retrieveMsg.bind(this)
-		);
-		this.friendService.getFriends("asontehusnth").subscribe(friends => {
-			console.log(friends);
-		});
+		this.subscription = this.route.queryParams.subscribe(this.retrieveMsg);
 	}
 
 	ngOnDestroy(): void {
@@ -32,8 +29,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	retrieveMsg(params: Params): void {
-		if (params.message) {
-			this.message = params.message;
+		if (params.error) {
+			this.error = params.error;
 			this.router.navigate(["home"]);
 		}
 	}
