@@ -25,9 +25,9 @@ export class ErrorInterceptor implements HttpInterceptor {
 			statusCodeStartsWith(error.status, 4) &&
 			instanceOfLastFmError(error.error)
 		) {
-			// this.router.navigate(["/home"], {
-			// 	queryParams: { error: errorCodeToString(error.error) },
-			// });
+			this.router.navigate(["/home"], {
+				queryParams: { error: errorCodeToString(error.error) },
+			});
 			return caught;
 		}
 		return throwError(error);

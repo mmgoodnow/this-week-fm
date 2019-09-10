@@ -14,6 +14,9 @@ export class CustomPeriodComponent extends PeriodBaseComponent {
 	toStr: NgbDate;
 	content: boolean;
 
+	from: Date;
+	to: Date;
+
 	options = {
 		fieldSeparator: ",",
 		quoteStrings: '"',
@@ -28,16 +31,14 @@ export class CustomPeriodComponent extends PeriodBaseComponent {
 
 	reload(): void {
 		this.content = true;
-		let to: Date;
-		let from: Date;
 		const f = this.fromStr;
 		const t = this.toStr;
 
 		console.log(this.fromStr, this.toStr);
-		from = new Date(f.year, f.month - 1, f.day);
-		to = new Date(t.year, t.month - 1, t.day + 1);
-		console.log(from, to);
-		this.loadUsers(from, to);
+		this.from = new Date(f.year, f.month - 1, f.day);
+		this.to = new Date(t.year, t.month - 1, t.day + 1);
+		console.log(this.from, this.to);
+		this.loadUsers(this.from, this.to);
 	}
 
 	protected setParams(params: Params): void {

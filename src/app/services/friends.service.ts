@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { LastService } from "./last.service";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { map, tap } from "rxjs/operators";
 import { lastFriendsToUsernames } from "../lib/transformations";
-import { instanceOfLastFmError } from "../models/LastResponses";
 import { Router } from "@angular/router";
 
 @Injectable({
