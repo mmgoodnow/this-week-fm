@@ -9,9 +9,9 @@
 	<tbody>
 		<tr *ngFor="let friend of friends | sort">
 			<td>
-				<a routerLink="/user/{{ friend.username }}" class="text-dark">{{
-					friend.username
-				}}</a>
+				<a routerLink="/user/{{ friend.username }}" class="text-dark">
+					{{ friend.username }}
+				</a>
 			</td>
 			<td>
 				<strong>{{ friend.tracks }}</strong>

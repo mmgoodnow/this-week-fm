@@ -4,9 +4,9 @@
 			{{ error }}.
 		</h1>
 		<h1 class="h3 mb-3 font-weight-normal">
-			<label for="inputUsername"
-				>Please enter your Last.fm username.</label
-			>
+			<label for="inputUsername">
+				Please enter your Last.fm username.
+			</label>
 		</h1>
 		<input
 			[(ngModel)]="username"
@@ -21,7 +21,8 @@
 			(keyup.space)="submit()"
 			routerLink="/user/{{ username }}"
 			class="btn btn-lg btn-success btn-block mt-2"
-			>Compete</a
 		>
+			Compete
+		</a>
 	</form>
 </div>
