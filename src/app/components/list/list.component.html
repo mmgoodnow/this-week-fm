@@ -10,70 +10,33 @@
 					<a
 						routerLink="/user/{{ friend.username }}"
 						class="username"
-						>{{ friend.username }}</a
-					>&nbsp;
-					<span ngbTooltip="Currently listening"
-						><fa *ngIf="friend.nowPlaying" name="play-circle"></fa
-					></span>
+					>
+						{{ friend.username }}
+					</a>
+					&nbsp;
+					<span ngbTooltip="Currently listening">
+						<fa *ngIf="friend.nowPlaying" name="play-circle"></fa>
+					</span>
 				</div>
 				<div class="flex-grow-1"></div>
-				<div class="d-flex flex-row overflow-hidden">
-					<a
-						href="{{ LAST_FM_USER_URL }}{{ friend.username }}"
-						class="ext-link lastfm"
-						rel="noreferrer noopener"
-						target="_blank"
-						ngbTooltip="Last.fm"
-					></a>
-					<a
-						href="{{ SERGEI_USER_URL }}{{ friend.username }}"
-						class="ext-link sergei"
-						rel="noreferrer noopener"
-						target="_blank"
-						ngbTooltip="SERGEI"
-					></a>
-					<a
-						href="{{ LAST_MILESTONES_USER_URL }}{{
-							friend.username
-						}}"
-						class="ext-link milestones"
-						rel="noreferrer noopener"
-						target="_blank"
-						ngbTooltip="LastMilestones"
-					></a>
-					<a
-						href="{{ SCATTER_FM_USER_URL }}{{ friend.username }}"
-						class="ext-link scatterfm"
-						rel="noreferrer noopener"
-						target="_blank"
-						ngbTooltip="ScatterFM"
-					></a>
-					<a
-						href="{{ EXPLR_FM_USER_URL }}{{ friend.username }}"
-						class="ext-link explr"
-						rel="noreferrer noopener"
-						target="_blank"
-						ngbTooltip="Explr"
-					></a>
-				</div>
+				<app-links></app-links>
 			</div>
 			<div class="text-right ellipsis">
-				<strong>{{ friend.tracks }}</strong> scrobbles ({{
-					friend.tracks | tracksPerDay: from:to
-				}}
+				<strong>{{ friend.tracks }}</strong>
+				scrobbles ({{ friend.tracks | tracksPerDay: from:to }}
 				per day)
 			</div>
 			<div *ngIf="i > 0" class="text-right behind ellipsis">
-				<small
-					>{{ friends[0].tracks - friend.tracks }} behind
-					{{ friends[0].username }}</small
-				>
+				<small>
+					{{ friends[0].tracks - friend.tracks }} behind
+					{{ friends[0].username }}
+				</small>
 			</div>
 			<div *ngIf="i > 1" class="text-right behind ellipsis">
-				<small
-					>{{ friends[i - 1].tracks - friend.tracks }} behind
-					{{ friends[i - 1].username }}</small
-				>
+				<small>
+					{{ friends[i - 1].tracks - friend.tracks }} behind
+					{{ friends[i - 1].username }}
+				</small>
 			</div>
 			<div class="text-right ellipsis" *ngIf="friend.latestTrack">
 				{{ friend.trackStr }}
@@ -97,14 +60,16 @@
 						<a
 							routerLink="/user/{{ friend.username }}"
 							class="username"
-							>{{ friend.username }}</a
-						>&nbsp;
-						<span ngbTooltip="Currently listening"
-							><fa
+						>
+							{{ friend.username }}
+						</a>
+						&nbsp;
+						<span ngbTooltip="Currently listening">
+							<fa
 								*ngIf="friend.nowPlaying"
 								name="play-circle"
-							></fa
-						></span>
+							></fa>
+						</span>
 					</div>
 					<div class="flex-grow-1"></div>
 					<div

@@ -21,6 +21,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { ErrorInterceptor } from "./lib/ErrorInterceptor";
 import { SortPipe } from "./pipes/sort.pipe";
 import { TracksPerDayPipe } from "./pipes/tracks-per-day.pipe";
+import { LinksComponent } from "./components/links/links.component";
 
 @NgModule({
 	declarations: [
@@ -36,6 +37,8 @@ import { TracksPerDayPipe } from "./pipes/tracks-per-day.pipe";
 		CustomPeriodComponent,
 		SortPipe,
 		TracksPerDayPipe,
+		LinksComponent,
+		LinksComponent,
 	],
 	imports: [
 		BrowserModule,
