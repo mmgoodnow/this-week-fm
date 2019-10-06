@@ -6,14 +6,22 @@ import {
 	Observable,
 	Subscription,
 } from "rxjs";
-import { map, mergeMap, tap } from "rxjs/operators";
+import { first, map, mergeMap, take, tap } from "rxjs/operators";
 import {
+	hydrateUserTracks,
 	lastFriendsToUsernames,
 	usernamesToFriends,
 } from "../lib/transformations";
 import Friend from "../models/Friend.model";
 import { TimeframeService } from "./timeframe.service";
-import { getLastFriday, partialR } from "../lib/utils";
+import {
+	getFirstOfYear,
+	getLastFriday,
+	intervalKey,
+	partial,
+	partialR,
+} from "../lib/utils";
+import { find } from "tslint/lib/utils";
 
 @Injectable({
 	providedIn: "root",
@@ -30,7 +38,8 @@ export class FriendsService {
 		this.friends.next = this.friends.next.bind(this.friends);
 		console.log = console.log.bind(console);
 		this.getFriends("mmgoodnow").subscribe(this.friends.next);
-		this.updateTimeframe(getLastFriday(), getLastFriday());
+		this.updateTimeframe(getFirstOfYear(), getLastFriday());
+		this.friends.subscribe(partial(console.log, "friends nexted"));
 	}
 
 	fillBlankFriends(usernames: string[]): void {
@@ -39,24 +48,39 @@ export class FriendsService {
 	}
 
 	updateTimeframe(from: Date, to: Date): void {
-		this.friends.subscribe(friends => {
-			fromArray(friends)
-				.pipe(mergeMap(partialR(this.getTracks, from, to)))
-				.subscribe(console.log);
-		});
+		this.friends
+			.pipe(first((friends: Friend[]) => friends.length > 0))
+			.subscribe((friends: Friend[]) => {
+				fromArray(friends)
+					.pipe(
+						mergeMap((friend: Friend) =>
+							this.getTracks(friend, from, to)
+						)
+					)
+					.subscribe(partial(this.friends.next, friends));
+			});
 	}
 
-	getTracks(friend: Friend, from: Date, to: Date): Observable<Friend> {
+	private getTracks(
+		friend: Friend,
+		from: Date,
+		to: Date
+	): Observable<Friend> {
+		const key = intervalKey(from, to);
 		return this.lastService
 			.getTracksRx(friend.username, from, to)
-			.pipe(tap(console.log));
+			.pipe(map(partial(hydrateUserTracks, friend, key)));
 	}
 
 	getFriends(username): Observable<Friend[]> {
+		const addUsername = (usernames: string[]) => {
+			usernames.push(username);
+			return usernames;
+		};
 		return this.lastService.getFriendsRx(username).pipe(
 			map(lastFriendsToUsernames),
-			map(usernamesToFriends),
-			tap(console.log)
+			map(addUsername),
+			map(usernamesToFriends)
 		);
 	}
 }
