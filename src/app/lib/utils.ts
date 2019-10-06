@@ -15,15 +15,13 @@ export function getLastFriday(): Date {
 }
 
 export function getFirstOfMonth(): Date {
-	const date = new Date();
-	const ret = new Date(date.getFullYear(), date.getMonth(), 1);
-	return ret;
+	const today = new Date();
+	return new Date(today.getFullYear(), today.getMonth(), 1);
 }
 
 export function getFirstOfYear(): Date {
-	const date = new Date();
-	const ret = new Date(date.getFullYear(), 0, 1);
-	return ret;
+	const today = new Date();
+	return new Date(today.getFullYear(), 0, 1);
 }
 
 export function statusCodeStartsWith(
@@ -31,4 +29,16 @@ export function statusCodeStartsWith(
 	digit: number
 ): boolean {
 	return String(statusCode).startsWith(String(digit));
+}
+
+export function intervalKey(from: Date, to: Date): string {
+	return `${from.valueOf()}-${to.valueOf()}`;
+}
+
+export function partial(func: Function, ...presets) {
+	return (...args) => func(...presets, ...args);
+}
+
+export function partialR(func: Function, ...presets) {
+	return (...args) => func(...args, ...presets);
 }

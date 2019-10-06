@@ -6,8 +6,9 @@ import Friend from "../models/Friend.model";
 	pure: false,
 })
 export class SortPipe implements PipeTransform {
-	transform(friends: Friend[], ...args: any[]): any {
-		console.log("sort pipe executing");
-		return friends.slice().sort((f1, f2) => f2.tracks - f1.tracks);
+	transform(friends: Friend[], rangeCode: string): any {
+		const compare = (f1: Friend, f2: Friend): number =>
+			f2.tracks.get(rangeCode).tracks - f1.tracks.get(rangeCode).tracks;
+		return friends.slice().sort(compare);
 	}
 }

@@ -1,0 +1,7 @@
+<div class="container">
+	<button class="btn btn-primary d-block" (click)="run()">Run</button>
+
+	<pre
+		class="d-block"
+	><code>{{ this.friendsService.friends | async | json }}</code></pre>
+</div>

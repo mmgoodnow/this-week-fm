@@ -1,29 +1,25 @@
 import Track from "./Track.model";
+import IntervalTracks from "./IntervalTracks.model";
 
 export default class Friend {
 	username: string;
-	tracks: number;
-	tracksPerDay: number;
-	latestTrack: Track;
+	tracks: Map<string, IntervalTracks>;
+	currentTrack?: Track;
+	doesShowPublicData: boolean;
 
 	constructor(username?: string) {
 		this.username = username;
-		this.tracks = 0;
-		this.tracksPerDay = 0;
-	}
-
-	get nowPlaying(): boolean {
-		return this.latestTrack && this.latestTrack.nowPlaying;
+		this.tracks = new Map<string, IntervalTracks>();
 	}
 
 	get trackStr(): string {
-		if (!this.latestTrack) {
+		if (!this.currentTrack) {
 			return "";
 		}
-		return `${this.latestTrack.artist} - ${this.latestTrack.name}`;
+		return `${this.currentTrack.artist} - ${this.currentTrack.name}`;
 	}
 
 	get trackRelDate(): string {
-		return this.latestTrack.dateRelStr;
+		return this.currentTrack.dateRelStr;
 	}
 }

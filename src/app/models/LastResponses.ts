@@ -5,6 +5,28 @@ export interface LastFriendsResponse {
 	};
 }
 
+export interface LastTrackListing {
+	"@attr": { nowplaying: string };
+	artist: {
+		"#text": string;
+	};
+	album: {
+		"#text": string;
+	};
+	date?: {
+		uts: string;
+	};
+	url: string;
+	name: string;
+}
+
+export interface LastTracksResponse {
+	recenttracks: {
+		"@attr": { total: string };
+		track: LastTrackListing | LastTrackListing[];
+	};
+}
+
 export interface LastFmError {
 	error: number;
 	message: string;

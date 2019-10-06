@@ -4,6 +4,7 @@ import { MainComponent } from "./components/main/main.component";
 import { ThisPeriodComponent } from "./components/this-period/this-period.component";
 import { LastPeriodComponent } from "./components/last-period/last-period.component";
 import { CustomPeriodComponent } from "./components/custom-period/custom-period.component";
+import { DebugComponent } from "./components/debug/debug.component";
 const appRoutes: Routes = [
 	{
 		path: "home",
@@ -31,6 +32,10 @@ const appRoutes: Routes = [
 				pathMatch: "full",
 			},
 		],
+	},
+	{
+		path: "debug",
+		component: DebugComponent,
 	},
 	{
 		path: "**",

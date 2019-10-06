@@ -22,6 +22,7 @@ import { ErrorInterceptor } from "./lib/ErrorInterceptor";
 import { SortPipe } from "./pipes/sort.pipe";
 import { TracksPerDayPipe } from "./pipes/tracks-per-day.pipe";
 import { LinksComponent } from "./components/links/links.component";
+import { DebugComponent } from "./components/debug/debug.component";
 
 @NgModule({
 	declarations: [
@@ -39,6 +40,7 @@ import { LinksComponent } from "./components/links/links.component";
 		TracksPerDayPipe,
 		LinksComponent,
 		LinksComponent,
+		DebugComponent,
 	],
 	imports: [
 		BrowserModule,

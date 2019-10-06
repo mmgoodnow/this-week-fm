@@ -55,10 +55,11 @@ export class LastService {
 				const tracks = json.recenttracks["@attr"].total;
 				return {
 					tracks,
-					latestTrack: new Track(
-						track.artist["#text"],
+					lastTrack: new Track(
 						track.name,
-						nowPlaying,
+						track.artist["#text"],
+						track.album["#text"],
+						track.url,
 						date
 					),
 				};
@@ -96,6 +97,20 @@ export class LastService {
 		const request = {
 			method: "user.getFriends",
 			user: username,
+			api_key: API_KEY,
+			format: "json",
+		};
+		const params = new HttpParams({ fromObject: request });
+		return this.http.get(API_URL, { params }).pipe(retry(2));
+	}
+
+	getTracksRx(user: string, from: Date, to: Date) {
+		const request = {
+			method: "user.getrecenttracks",
+			limit: String(1),
+			user,
+			from: String(Math.floor(from.valueOf() / 1000)),
+			to: String(Math.floor(to.valueOf() / 1000)),
 			api_key: API_KEY,
 			format: "json",
 		};

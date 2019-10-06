@@ -86,12 +86,14 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 							to.valueOf(),
 							new Date().valueOf()
 						);
-						currentFriend.tracksPerDay = Math.round(
-							currentFriend.tracks /
-								((toDateValue - from.valueOf()) / 86400000)
-						);
+						// currentFriend.tracksPerDay = Math.round(
+						// 	currentFriend.tracks /
+						// 		((toDateValue - from.valueOf()) / 86400000)
+						// );
 					});
-					this.friends.sort((a, b) => b.tracks - a.tracks);
+					// this.friends.sort(
+					// 	(a: Friend, b: Friend): number => b.tracks - a.tracks
+					// );
 					this.filled = true;
 				});
 			})
