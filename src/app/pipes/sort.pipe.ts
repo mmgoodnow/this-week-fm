@@ -7,8 +7,11 @@ import Friend from "../models/Friend.model";
 })
 export class SortPipe implements PipeTransform {
 	transform(friends: Friend[], rangeCode: string): any {
-		const compare = (f1: Friend, f2: Friend): number =>
-			f2.tracks.get(rangeCode).tracks - f1.tracks.get(rangeCode).tracks;
+		const compare = (f1: Friend, f2: Friend): number => {
+			const tracks1 = f1.safeGetTracks(rangeCode);
+			const tracks2 = f2.safeGetTracks(rangeCode);
+			return tracks2 - tracks1;
+		};
 		return friends.slice().sort(compare);
 	}
 }

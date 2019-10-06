@@ -7,17 +7,19 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let friend of friends | sort">
+		<tr
+			*ngFor="let f of friendsService.friends | async | sort: intervalKey"
+		>
 			<td>
-				<a routerLink="/user/{{ friend.username }}" class="text-dark">
-					{{ friend.username }}
+				<a routerLink="/user/{{ f.username }}" class="text-dark">
+					{{ f.username }}
 				</a>
 			</td>
 			<td>
-				<strong>{{ friend.tracks }}</strong>
+				<strong>{{ f | tracks: intervalKey }}</strong>
 			</td>
 			<td>
-				{{ friend.tracks | tracksPerDay: from:to }}
+				{{ f | tracks: intervalKey | tracksPerDay: from:to }}
 			</td>
 		</tr>
 	</tbody>

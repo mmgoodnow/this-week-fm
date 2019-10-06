@@ -12,6 +12,12 @@ export default class Friend {
 		this.tracks = new Map<string, IntervalTracks>();
 	}
 
+	safeGetTracks(rangeCode) {
+		return this.tracks.get(rangeCode) !== undefined
+			? this.tracks.get(rangeCode).tracks
+			: 0;
+	}
+
 	get trackStr(): string {
 		if (!this.currentTrack) {
 			return "";

@@ -10,6 +10,8 @@ import { getFirstOfYear, getLastFriday } from "../../lib/utils";
 export class DebugComponent implements OnInit {
 	constructor(private friendsService: FriendsService) {}
 	showCode: boolean;
+	from = getFirstOfYear();
+	to = getLastFriday();
 	ngOnInit() {}
 
 	run() {

@@ -1,7 +1,7 @@
 <div class="container">
-	<button class="btn btn-primary d-block" (click)="run()">Run</button>
-	<button class="btn btn-primary d-block" (click)="toggle()">Toggle</button>
-	<pre
-		class="d-block"
-	><code *ngIf="showCode">{{ this.friendsService.friends | async | json }}</code></pre>
+	<span>
+		<button class="btn btn-primary" (click)="run()">Run</button>
+		<button class="btn btn-primary" (click)="toggle()">Toggle</button>
+	</span>
+	<app-table [friends]="null" [from]="from" [to]="to"></app-table>
 </div>

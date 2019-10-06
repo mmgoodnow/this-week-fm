@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import Friend from "../../models/Friend.model";
+import { FriendsService } from "../../services/friends.service";
+import { intervalKey } from "../../lib/utils";
 
 @Component({
 	selector: "app-table",
@@ -16,5 +18,11 @@ export class TableComponent implements OnInit {
 	@Input()
 	to: Date;
 
+	constructor(private friendsService: FriendsService) {}
+
 	ngOnInit() {}
+
+	get intervalKey() {
+		return intervalKey(this.from, this.to);
+	}
 }
