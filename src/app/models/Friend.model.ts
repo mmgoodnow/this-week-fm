@@ -17,15 +17,4 @@ export default class Friend {
 			? this.tracks.get(rangeCode).tracks
 			: 0;
 	}
-
-	get trackStr(): string {
-		if (!this.currentTrack) {
-			return "";
-		}
-		return `${this.currentTrack.artist} - ${this.currentTrack.name}`;
-	}
-
-	get trackRelDate(): string {
-		return this.currentTrack.dateRelStr;
-	}
 }

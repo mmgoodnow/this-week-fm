@@ -27,6 +27,7 @@ import { TracksPipe } from "./pipes/tracks.pipe";
 import { TracksBehindPipe } from "./pipes/tracks-behind.pipe";
 import { TrackPipe } from "./pipes/track.pipe";
 import { LastTrackPipe } from "./pipes/last-track.pipe";
+import { RelativeDatePipe } from "./pipes/relative-date.pipe";
 
 @NgModule({
 	declarations: [
@@ -49,6 +50,7 @@ import { LastTrackPipe } from "./pipes/last-track.pipe";
 		TracksBehindPipe,
 		TrackPipe,
 		LastTrackPipe,
+		RelativeDatePipe,
 	],
 	imports: [
 		BrowserModule,

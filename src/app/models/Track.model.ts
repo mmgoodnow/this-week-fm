@@ -1,5 +1,3 @@
-import * as moment from "moment-mini";
-
 export default class Track {
 	name: string;
 	artist: string;
@@ -22,9 +20,5 @@ export default class Track {
 		this.url = url;
 		this.nowPlaying = nowPlaying;
 		this.date = date;
-	}
-
-	get dateRelStr(): string {
-		return moment(this.date).fromNow();
 	}
 }
