@@ -24,6 +24,9 @@ import { TracksPerDayPipe } from "./pipes/tracks-per-day.pipe";
 import { LinksComponent } from "./components/links/links.component";
 import { DebugComponent } from "./components/debug/debug.component";
 import { TracksPipe } from "./pipes/tracks.pipe";
+import { TracksBehindPipe } from "./pipes/tracks-behind.pipe";
+import { TrackPipe } from "./pipes/track.pipe";
+import { LastTrackPipe } from "./pipes/last-track.pipe";
 
 @NgModule({
 	declarations: [
@@ -43,6 +46,9 @@ import { TracksPipe } from "./pipes/tracks.pipe";
 		LinksComponent,
 		DebugComponent,
 		TracksPipe,
+		TracksBehindPipe,
+		TrackPipe,
+		LastTrackPipe,
 	],
 	imports: [
 		BrowserModule,

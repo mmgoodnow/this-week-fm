@@ -7,6 +7,8 @@ import {
 	SCATTER_FM_USER_URL,
 	LAST_MILESTONES_USER_URL,
 } from "../../lib/constants";
+import { FriendsService } from "../../services/friends.service";
+import { intervalKey } from "../../lib/utils";
 
 @Component({
 	selector: "app-list",
@@ -32,5 +34,9 @@ export class ListComponent {
 	LAST_MILESTONES_USER_URL: string = LAST_MILESTONES_USER_URL;
 	SCATTER_FM_USER_URL: string = SCATTER_FM_USER_URL;
 
-	constructor() {}
+	constructor(private friendsService: FriendsService) {}
+
+	get intervalKey() {
+		return intervalKey(this.from, this.to);
+	}
 }

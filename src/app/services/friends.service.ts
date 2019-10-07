@@ -21,7 +21,6 @@ import {
 	partial,
 	partialR,
 } from "../lib/utils";
-import { find } from "tslint/lib/utils";
 
 @Injectable({
 	providedIn: "root",
