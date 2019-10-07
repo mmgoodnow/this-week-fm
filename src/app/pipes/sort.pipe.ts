@@ -6,7 +6,7 @@ import Friend from "../models/Friend.model";
 	pure: false,
 })
 export class SortPipe implements PipeTransform {
-	transform(friends: Friend[], rangeCode: string): any {
+	transform(friends: Friend[], rangeCode: string): Friend[] {
 		const compare = (f1: Friend, f2: Friend): number => {
 			const tracks1 = f1.safeGetTracks(rangeCode);
 			const tracks2 = f2.safeGetTracks(rangeCode);

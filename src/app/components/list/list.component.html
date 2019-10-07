@@ -55,10 +55,7 @@
 </ul>
 <ng-template #conciseView>
 	<ul class="list-group">
-		<li
-			class="list-group-item"
-			*ngFor="let friend of friends; let i = index"
-		>
+		<li class="list-group-item" *ngFor="let friend of friends; index as i">
 			<div class="flex-cont d-flex flex-column">
 				<div class="title mb-1 d-flex flex-row flex-wrap">
 					<div class="flex-shrink-0">
@@ -69,20 +66,23 @@
 						>
 							{{ friend.username }}
 						</a>
-						&nbsp;
-						<span ngbTooltip="Currently listening">
-							<fa
-								*ngIf="friend.isNowPlaying"
-								name="play-circle"
-							></fa>
+					</div>
+					<div class="flex-shrink-1 ellipsis">
+						<span *ngIf="friend.currentTrack">
+							<span ngbTooltip="Currently listening">
+								<fa name="play-circle"></fa>
+							</span>
+							{{ friend.currentTrack | track }}
 						</span>
 					</div>
 					<div class="flex-grow-1"></div>
 					<div
 						class="text-right"
-						ngbTooltip="{{ friend.tracksPerDay }} per day"
+						ngbTooltip="{{
+							friend | tracks: intervalKey | tracksPerDay: from:to
+						}} per day"
 					>
-						<strong>{{ friend.tracks }}</strong>
+						<strong>{{ friend | tracks: intervalKey }}</strong>
 					</div>
 				</div>
 			</div>
