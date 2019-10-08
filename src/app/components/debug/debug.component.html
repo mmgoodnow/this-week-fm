@@ -1,7 +1,8 @@
 <div class="container">
-	<span>
+	<span class="button-row">
 		<button class="btn btn-primary" (click)="run()">Run</button>
 		<button class="btn btn-primary" (click)="toggle()">Toggle</button>
+		<app-csv [rangeCode]="rangeCode">Download as CSV</app-csv>
 	</span>
 	<app-table [friends]="null" [from]="from" [to]="to"></app-table>
 	<app-list [friends]="null" [from]="from" [to]="to"></app-list>

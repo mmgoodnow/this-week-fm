@@ -4,13 +4,8 @@
 			<app-list [friends]="friends" [concise]="true"></app-list>
 		</div>
 		<div class="d-none d-sm-block">
-			<app-csv
-				class="csv"
-				[data]="friends"
-				[filename]="'last ' + timeframe"
-				[options]="options"
-			>
-				<button class="btn btn-sm btn-primary">Download as CSV</button>
+			<app-csv [rangeCode]="rangeCode">
+				Download as CSV
 			</app-csv>
 			<div class="my-1">
 				<app-table

@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FriendsService } from "../../services/friends.service";
-import { getFirstOfYear, getLastFriday } from "../../lib/utils";
+import { getFirstOfYear, getLastFriday, intervalKey } from "../../lib/utils";
+import { downloadAsCSV } from "../../lib/csv";
+import { first } from "rxjs/operators";
+import { interval } from "rxjs";
 
 @Component({
 	selector: "app-debug",
@@ -12,7 +15,9 @@ export class DebugComponent implements OnInit {
 	showCode: boolean;
 	from = getFirstOfYear();
 	to = getLastFriday();
-	ngOnInit() {}
+	ngOnInit() {
+		this.friendsService.getFriends("mmgoodnow");
+	}
 
 	run() {
 		this.friendsService.updateTimeframe(getFirstOfYear(), getLastFriday());
@@ -21,7 +26,23 @@ export class DebugComponent implements OnInit {
 		);
 	}
 
-	toggle() {
+	toggle(): void {
 		this.showCode = !this.showCode;
+	}
+
+	get rangeCode() {
+		return intervalKey(this.from, this.to);
+	}
+
+	downloadCsv(): void {
+		this.friendsService.friends
+			.pipe(first())
+			.subscribe(friends =>
+				downloadAsCSV(
+					"last_fm_friends.csv",
+					friends,
+					intervalKey(this.from, this.to)
+				)
+			);
 	}
 }

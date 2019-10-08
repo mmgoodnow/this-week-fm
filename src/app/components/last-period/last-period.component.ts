@@ -4,6 +4,7 @@ import {
 	getFirstOfMonth,
 	getFirstOfYear,
 	getLastFriday,
+	intervalKey,
 } from "../../lib/utils";
 
 @Component({
@@ -12,20 +13,12 @@ import {
 	styleUrls: ["./last-period.component.css"],
 })
 export class LastPeriodComponent extends PeriodBaseComponent {
-	options = {
-		fieldSeparator: ",",
-		quoteStrings: '"',
-		decimalseparator: ".",
-		showLabels: false,
-		headers: ["Username", "Tracks"],
-		showTitle: false,
-		useBom: false,
-		removeNewLines: true,
-		keys: ["username", "tracks"],
-	};
-
 	to: Date;
 	from: Date;
+
+	get rangeCode() {
+		return intervalKey(this.from, this.to);
+	}
 
 	reload(): void {
 		switch (this.timeframe) {

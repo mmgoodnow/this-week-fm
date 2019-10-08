@@ -35,10 +35,6 @@ export class FriendsService {
 		this.fillBlankFriends = this.fillBlankFriends.bind(this);
 		this.getTracks = this.getTracks.bind(this);
 		this.friends.next = this.friends.next.bind(this.friends);
-		console.log = console.log.bind(console);
-		this.getFriends("mmgoodnow").subscribe(this.friends.next);
-		this.updateTimeframe(getFirstOfYear(), getLastFriday());
-		this.friends.subscribe(partial(console.log, "friends nexted"));
 	}
 
 	fillBlankFriends(usernames: string[]): void {
@@ -71,15 +67,18 @@ export class FriendsService {
 			.pipe(map(partial(hydrateUserTracks, friend, key)));
 	}
 
-	getFriends(username): Observable<Friend[]> {
+	getFriends(username): void {
 		const addUsername = (usernames: string[]) => {
 			usernames.push(username);
 			return usernames;
 		};
-		return this.lastService.getFriendsRx(username).pipe(
-			map(lastFriendsToUsernames),
-			map(addUsername),
-			map(usernamesToFriends)
-		);
+		this.lastService
+			.getFriendsRx(username)
+			.pipe(
+				map(lastFriendsToUsernames),
+				map(addUsername),
+				map(usernamesToFriends)
+			)
+			.subscribe(this.friends.next);
 	}
 }

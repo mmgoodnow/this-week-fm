@@ -8,7 +8,6 @@ import { TableComponent } from "./components/table/table.component";
 import { ListComponent } from "./components/list/list.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { Angular2CsvModule } from "angular2-csv";
 import { CsvComponent } from "./components/csv/csv.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MainComponent } from "./components/main/main.component";
@@ -59,7 +58,6 @@ import { RelativeDatePipe } from "./pipes/relative-date.pipe";
 		routing,
 		AngularFontAwesomeModule,
 		NgbModule,
-		Angular2CsvModule,
 		ServiceWorkerModule.register("ngsw-worker.js", {
 			enabled: environment.production,
 		}),

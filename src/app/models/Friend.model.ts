@@ -12,6 +12,12 @@ export default class Friend {
 		this.tracks = new Map<string, IntervalTracks>();
 	}
 
+	static compareByTracks(rangeCode, f1: Friend, f2: Friend): number {
+		const tracks1 = f1.safeGetTracks(rangeCode);
+		const tracks2 = f2.safeGetTracks(rangeCode);
+		return tracks2 - tracks1;
+	}
+
 	safeGetTracks(rangeCode) {
 		return this.tracks.get(rangeCode) !== undefined
 			? this.tracks.get(rangeCode).tracks

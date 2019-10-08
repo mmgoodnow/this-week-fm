@@ -26,7 +26,6 @@
 		"@ng-bootstrap/ng-bootstrap": "^4.0.1",
 		"@types/chart.js": "^2.7.42",
 		"angular-font-awesome": "^3.1.2",
-		"angular2-csv": "github:elsagecien/angular2-csv",
 		"bootstrap": "^4.3.1",
 		"chart.js": "^2.7.3",
 		"compression": "^1.7.3",
