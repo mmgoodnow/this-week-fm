@@ -17,9 +17,6 @@ import { intervalKey } from "../../lib/utils";
 })
 export class ListComponent {
 	@Input()
-	friends: Friend[];
-
-	@Input()
 	concise: boolean;
 
 	@Input()

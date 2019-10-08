@@ -1,37 +1,43 @@
 <div class="max-30">
 	<div class="d-flex flex-row">
-		<input
-			class="mr-1 flex-shrink-1 form-control"
-			name="From"
-			placeholder="From"
-			(click)="dFrom.toggle()"
-			type="text"
-			[(ngModel)]="fromStr"
-			ngbDatepicker
-			#dFrom="ngbDatepicker"
-		/>
-		<input
-			class="flex-shrink-1 form-control"
-			name="To"
-			placeholder="To"
-			(click)="dTo.toggle()"
-			type="text"
-			[(ngModel)]="toStr"
-			ngbDatepicker
-			#dTo="ngbDatepicker"
-		/>
+		<label>
+			Start:
+			<input
+				class="mr-1 flex-shrink-1 form-control"
+				name="From"
+				placeholder="From"
+				(click)="dFrom.toggle()"
+				type="text"
+				[(ngModel)]="fromStr"
+				ngbDatepicker
+				#dFrom="ngbDatepicker"
+			/>
+		</label>
+		<label>
+			End:
+			<input
+				class="flex-shrink-1 form-control"
+				name="To"
+				placeholder="To"
+				(click)="dTo.toggle()"
+				type="text"
+				[(ngModel)]="toStr"
+				ngbDatepicker
+				#dTo="ngbDatepicker"
+			/>
+		</label>
 	</div>
 	<button class="btn btn-sm btn-primary my-1 ellipsis" (click)="reload()">
 		Calculate
 	</button>
 	<ng-container *ngIf="filled; else loading">
 		<div class="d-sm-none mb-1">
-			<app-list [friends]="friends" [concise]="true"></app-list>
+			<app-list [concise]="true"></app-list>
 		</div>
 		<div class="d-none d-sm-block">
 			<app-csv>Download as CSV</app-csv>
 			<div class="my-1">
-				<app-table [friends]="friends"></app-table>
+				<app-table></app-table>
 			</div>
 		</div>
 	</ng-container>

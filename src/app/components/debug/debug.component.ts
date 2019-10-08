@@ -21,9 +21,6 @@ export class DebugComponent implements OnInit {
 
 	run() {
 		this.friendsService.updateTimeframe(getFirstOfYear(), getLastFriday());
-		this.friendsService.friends.subscribe(h =>
-			console.log("hello", JSON.parse(JSON.stringify(h)))
-		);
 	}
 
 	toggle(): void {
