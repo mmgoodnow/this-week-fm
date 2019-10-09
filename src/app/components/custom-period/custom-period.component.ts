@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { PeriodBaseComponent } from "../period-base/period-base.component";
 import { Params } from "@angular/router";
 import User from "../../models/User.model";

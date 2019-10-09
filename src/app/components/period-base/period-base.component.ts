@@ -1,9 +1,6 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import IntervalTracks from "../../models/IntervalTracks.model";
-import Friend from "../../models/Friend.model";
-import { alertError } from "../../lib/utils";
 import User from "../../models/User.model";
 import { LastService } from "../../services/last.service";
 import { MainComponent } from "../main/main.component";
@@ -13,9 +10,6 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 	private subscriptions: Subscription;
 
 	user: User;
-	friends: Friend[];
-	filled: boolean;
-	numFilled: number;
 	timeframe: string;
 
 	constructor(
@@ -24,7 +18,6 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private parent: MainComponent
 	) {
-		this.friends = [];
 		this.subscriptions = new Subscription();
 	}
 
@@ -55,48 +48,5 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 
 	abstract reload(): void;
 
-	loadUsers(from: Date, to: Date) {
-		this.friends = [];
-		this.filled = false;
-		this.numFilled = 0;
-		this.friends.push(this.user.reset());
-		let promises: Promise<IntervalTracks>[] = [];
-		this.service
-			.getFriends(this.user.username)
-			.then((friends: Friend[]) => {
-				this.friends.push(...friends);
-			})
-			.then(
-				() =>
-					(promises = this.friends.map((user: Friend) =>
-						this.service
-							.getTracks(user.username, from, to)
-							.then((res: IntervalTracks) => {
-								this.numFilled++;
-								return res;
-							})
-					))
-			)
-			.then(() => {
-				Promise.all(promises).then(responses => {
-					responses.forEach((tracks: IntervalTracks, i) => {
-						const currentFriend: Friend = this.friends[i];
-						Object.assign(currentFriend, tracks);
-						const toDateValue = Math.min(
-							to.valueOf(),
-							new Date().valueOf()
-						);
-						// currentFriend.tracksPerDay = Math.round(
-						// 	currentFriend.tracks /
-						// 		((toDateValue - from.valueOf()) / 86400000)
-						// );
-					});
-					// this.friends.sort(
-					// 	(a: Friend, b: Friend): number => b.tracks - a.tracks
-					// );
-					this.filled = true;
-				});
-			})
-			.catch(alertError);
-	}
+	loadUsers(from: Date, to: Date): void {}
 }

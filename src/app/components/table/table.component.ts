@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from "@angular/core";
-import Friend from "../../models/Friend.model";
 import { FriendsService } from "../../services/friends.service";
 import { intervalKey } from "../../lib/utils";
 

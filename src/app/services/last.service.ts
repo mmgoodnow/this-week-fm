@@ -9,9 +9,8 @@ import IntervalTracks from "../models/IntervalTracks.model";
 import Friend from "../models/Friend.model";
 import User from "../models/User.model";
 import Track from "../models/Track.model";
-import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { retry, retryWhen } from "rxjs/operators";
+import { retry } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root",

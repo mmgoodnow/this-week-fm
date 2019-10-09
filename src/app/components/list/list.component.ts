@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import Friend from "../../models/Friend.model";
 import {
 	EXPLR_FM_USER_URL,
 	LAST_FM_USER_URL,

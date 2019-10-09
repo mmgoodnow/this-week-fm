@@ -1,26 +1,14 @@
 import { Injectable } from "@angular/core";
 import { LastService } from "./last.service";
-import {
-	BehaviorSubject,
-	from as fromArray,
-	Observable,
-	Subscription,
-} from "rxjs";
-import { first, map, mergeMap, take, tap } from "rxjs/operators";
+import { BehaviorSubject, from as fromArray, Observable } from "rxjs";
+import { first, map, mergeMap } from "rxjs/operators";
 import {
 	hydrateUserTracks,
 	lastFriendsToUsernames,
 	usernamesToFriends,
 } from "../lib/transformations";
 import Friend from "../models/Friend.model";
-import { TimeframeService } from "./timeframe.service";
-import {
-	getFirstOfYear,
-	getLastFriday,
-	intervalKey,
-	partial,
-	partialR,
-} from "../lib/utils";
+import { intervalKey, partial } from "../lib/utils";
 
 @Injectable({
 	providedIn: "root",
@@ -28,10 +16,7 @@ import {
 export class FriendsService {
 	friends: BehaviorSubject<Friend[]> = new BehaviorSubject<Friend[]>([]);
 
-	constructor(
-		private lastService: LastService,
-		private timeframeService: TimeframeService
-	) {
+	constructor(private lastService: LastService) {
 		this.fillBlankFriends = this.fillBlankFriends.bind(this);
 		this.getTracks = this.getTracks.bind(this);
 		this.friends.next = this.friends.next.bind(this.friends);

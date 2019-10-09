@@ -3,7 +3,6 @@ import { FriendsService } from "../../services/friends.service";
 import { getFirstOfYear, getLastFriday, intervalKey } from "../../lib/utils";
 import { downloadAsCSV } from "../../lib/csv";
 import { first } from "rxjs/operators";
-import { interval } from "rxjs";
 
 @Component({
 	selector: "app-debug",
