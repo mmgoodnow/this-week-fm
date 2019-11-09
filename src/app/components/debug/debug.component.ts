@@ -19,7 +19,7 @@ export class DebugComponent implements OnInit {
 	}
 
 	run() {
-		this.friendsService.updateTimeframe(getFirstOfYear(), getLastFriday());
+		this.friendsService.update(getFirstOfYear(), getLastFriday());
 	}
 
 	toggle(): void {

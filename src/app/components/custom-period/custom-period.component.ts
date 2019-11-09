@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { PeriodBaseComponent } from "../period-base/period-base.component";
 import { Params } from "@angular/router";
-import User from "../../models/User.model";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
+import { intervalKey } from "../../lib/utils";
 
 @Component({
 	selector: "app-custom-period",
@@ -12,25 +12,11 @@ import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 export class CustomPeriodComponent extends PeriodBaseComponent {
 	fromStr: NgbDate;
 	toStr: NgbDate;
-	content: boolean;
 
 	from: Date;
 	to: Date;
 
-	options = {
-		fieldSeparator: ",",
-		quoteStrings: '"',
-		decimalseparator: ".",
-		showLabels: false,
-		headers: ["Username", "Tracks"],
-		showTitle: false,
-		useBom: false,
-		removeNewLines: true,
-		keys: ["username", "tracks"],
-	};
-
 	reload(): void {
-		this.content = true;
 		const f = this.fromStr;
 		const t = this.toStr;
 
@@ -39,9 +25,11 @@ export class CustomPeriodComponent extends PeriodBaseComponent {
 		this.loadUsers(this.from, this.to);
 	}
 
-	protected setParams(params: Params): void {
-		if (params.username) {
-			this.user = new User(params.username);
-		}
+	protected didReceiveParams(params: Params): void {
+		this.setUsername(params.username);
+	}
+
+	get intervalKey() {
+		return intervalKey(this.from, this.to);
 	}
 }

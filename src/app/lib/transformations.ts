@@ -1,5 +1,6 @@
 import Friend from "../models/Friend.model";
 import {
+	instanceOfLastFmError,
 	LastFmError,
 	LastFriendsResponse,
 	LastTrackListing,
@@ -7,6 +8,8 @@ import {
 } from "../models/LastResponses";
 import Track from "../models/Track.model";
 import IntervalTracks from "../models/IntervalTracks.model";
+import { statusCodeStartsWith } from "./utils";
+import { of } from "rxjs";
 
 export function lastFriendsToUsernames(friends: LastFriendsResponse): string[] {
 	return friends.friends.user.map(user => user.name);
@@ -64,5 +67,17 @@ export function hydrateUserTracks(
 
 	friend.currentTrack = nowPlaying;
 	friend.tracks.set(timeframe, listing);
+	friend.doesShowPublicData = true;
 	return friend;
+}
+
+export function handleUserTracksError(friend: Friend, error) {
+	if (
+		statusCodeStartsWith(error.status, 4) &&
+		instanceOfLastFmError(error.error) &&
+		[17].includes(error.error.error)
+	) {
+		friend.doesShowPublicData = false;
+		return of(friend);
+	}
 }

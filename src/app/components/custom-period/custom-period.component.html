@@ -30,26 +30,13 @@
 	<button class="btn btn-sm btn-primary my-1 ellipsis" (click)="reload()">
 		Calculate
 	</button>
-	<ng-container *ngIf="filled; else loading">
-		<div class="d-sm-none mb-1">
-			<app-list [concise]="true"></app-list>
+	<div *ngIf="from && to" class="d-sm-none mb-1">
+		<app-list [concise]="true" [to]="to" [from]="from"></app-list>
+	</div>
+	<div *ngIf="from && to" class="d-none d-sm-block">
+		<app-csv [rangeCode]="intervalKey">Download as CSV</app-csv>
+		<div class="my-1">
+			<app-table [from]="from" [to]="to"></app-table>
 		</div>
-		<div class="d-none d-sm-block">
-			<app-csv>Download as CSV</app-csv>
-			<div class="my-1">
-				<app-table></app-table>
-			</div>
-		</div>
-	</ng-container>
+	</div>
 </div>
-<ng-template #loading>
-	<ng-container *ngIf="content">
-		<ngb-progressbar
-			type="success"
-			[value]="numFilled"
-			[max]="friends.length"
-		>
-			{{ numFilled }} of {{ friends.length }}
-		</ngb-progressbar>
-	</ng-container>
-</ng-template>

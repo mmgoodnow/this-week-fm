@@ -20,15 +20,16 @@ export class ErrorInterceptor implements HttpInterceptor {
 	}
 
 	handleError(error: HttpErrorResponse, caught: Observable<any>) {
-		console.log(caught);
+		console.log(error, caught);
+
 		if (
 			statusCodeStartsWith(error.status, 4) &&
-			instanceOfLastFmError(error.error)
+			instanceOfLastFmError(error.error) &&
+			[6].includes(error.error.error)
 		) {
 			this.router.navigate(["/home"], {
 				queryParams: { error: errorCodeToString(error.error) },
 			});
-			return caught;
 		}
 		return throwError(error);
 	}
