@@ -1,0 +1,26 @@
+<table>
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Scrobbles</th>
+			<th>Scrobbles per day</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr
+			*ngFor="let f of friendsService.friends | async | sort: intervalKey"
+		>
+			<td>
+				<a routerLink="/user/{{ f.username }}" class="text-dark">
+					{{ f.username }}
+				</a>
+			</td>
+			<td>
+				<strong>{{ f | tracks: intervalKey }}</strong>
+			</td>
+			<td>
+				{{ f | tracks: intervalKey | tracksPerDay: from:to }}
+			</td>
+		</tr>
+	</tbody>
+</table>

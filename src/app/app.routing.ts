@@ -1,9 +1,10 @@
 import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from "./home/home.component";
-import { MainComponent } from "./main/main.component";
-import { ThisPeriodComponent } from "./this-period/this-period.component";
-import { LastPeriodComponent } from "./last-period/last-period.component";
-import { CustomPeriodComponent } from "./custom-period/custom-period.component";
+import { HomeComponent } from "./components/home/home.component";
+import { MainComponent } from "./components/main/main.component";
+import { ThisPeriodComponent } from "./components/this-period/this-period.component";
+import { LastPeriodComponent } from "./components/last-period/last-period.component";
+import { CustomPeriodComponent } from "./components/custom-period/custom-period.component";
+import { DebugComponent } from "./components/debug/debug.component";
 const appRoutes: Routes = [
 	{
 		path: "home",
@@ -31,6 +32,10 @@ const appRoutes: Routes = [
 				pathMatch: "full",
 			},
 		],
+	},
+	{
+		path: "debug",
+		component: DebugComponent,
 	},
 	{
 		path: "**",

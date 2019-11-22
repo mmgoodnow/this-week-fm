@@ -1,0 +1,11 @@
+li {
+	padding: 0.4rem 1.25rem;
+}
+
+a.username {
+	font-weight: bold;
+}
+
+.overflow-auto {
+	overflow: auto;
+}

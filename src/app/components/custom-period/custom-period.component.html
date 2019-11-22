@@ -1,0 +1,42 @@
+<div class="max-30">
+	<div class="d-flex flex-row">
+		<label>
+			Start:
+			<input
+				class="mr-1 flex-shrink-1 form-control"
+				name="From"
+				placeholder="From"
+				(click)="dFrom.toggle()"
+				type="text"
+				[(ngModel)]="fromStr"
+				ngbDatepicker
+				#dFrom="ngbDatepicker"
+			/>
+		</label>
+		<label>
+			End:
+			<input
+				class="flex-shrink-1 form-control"
+				name="To"
+				placeholder="To"
+				(click)="dTo.toggle()"
+				type="text"
+				[(ngModel)]="toStr"
+				ngbDatepicker
+				#dTo="ngbDatepicker"
+			/>
+		</label>
+	</div>
+	<button class="btn btn-sm btn-primary my-1 ellipsis" (click)="reload()">
+		Calculate
+	</button>
+	<div *ngIf="from && to" class="d-sm-none mb-1">
+		<app-list [concise]="true" [to]="to" [from]="from"></app-list>
+	</div>
+	<div *ngIf="from && to" class="d-none d-sm-block">
+		<app-csv [rangeCode]="intervalKey">Download as CSV</app-csv>
+		<div class="my-1">
+			<app-table [from]="from" [to]="to"></app-table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="max-30">
+	<div class="d-sm-none my-1">
+		<app-list [concise]="true" [from]="from" [to]="to"></app-list>
+	</div>
+	<div class="d-none d-sm-block">
+		<app-csv [rangeCode]="rangeCode">Download as CSV</app-csv>
+		<div class="my-1">
+			<app-table [from]="from" [to]="to"></app-table>
+		</div>
+	</div>
+</div>
