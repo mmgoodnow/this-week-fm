@@ -17,7 +17,7 @@ export class ListComponent {
 	@Input()
 	to: Date;
 
-	constructor(private friendsService: FriendsService) {}
+	constructor(public friendsService: FriendsService) {}
 
 	get intervalKey() {
 		return intervalKey(this.from, this.to);

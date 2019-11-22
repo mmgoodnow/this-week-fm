@@ -14,7 +14,7 @@ export class TableComponent implements OnInit {
 	@Input()
 	to: Date;
 
-	constructor(private friendsService: FriendsService) {}
+	constructor(public friendsService: FriendsService) {}
 
 	ngOnInit() {}
 
