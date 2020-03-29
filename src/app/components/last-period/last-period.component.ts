@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { PeriodBaseComponent } from "../period-base/period-base.component";
+import { PeriodBaseDirective } from "../../directives/period-base/period-base.directive";
 import {
 	getFirstOfMonth,
 	getFirstOfYear,
@@ -12,7 +12,7 @@ import {
 	templateUrl: "./last-period.component.html",
 	styleUrls: ["./last-period.component.css"],
 })
-export class LastPeriodComponent extends PeriodBaseComponent {
+export class LastPeriodComponent extends PeriodBaseDirective {
 	to: Date;
 	from: Date;
 

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { PeriodBaseComponent } from "../period-base/period-base.component";
+import { PeriodBaseDirective } from "../../directives/period-base/period-base.directive";
 import * as moment from "moment-mini";
 import {
 	getFirstOfMonth,
@@ -12,11 +12,17 @@ import {
 	templateUrl: "./this-period.component.html",
 	styleUrls: ["./this-period.component.css"],
 })
-export class ThisPeriodComponent extends PeriodBaseComponent {
-	private _lastUpdated: Date;
+export class ThisPeriodComponent extends PeriodBaseDirective {
 	concise = false;
 	from: Date;
 	to: Date;
+
+	private _lastUpdated: Date;
+
+	get lastUpdated(): string {
+		return moment(this._lastUpdated).fromNow();
+	}
+
 	reload(): void {
 		switch (this.timeframe) {
 			case "week":
@@ -41,9 +47,5 @@ export class ThisPeriodComponent extends PeriodBaseComponent {
 	loadUsers(from: Date, to: Date) {
 		this._lastUpdated = new Date();
 		super.loadUsers(from, to);
-	}
-
-	get lastUpdated(): string {
-		return moment(this._lastUpdated).fromNow();
 	}
 }

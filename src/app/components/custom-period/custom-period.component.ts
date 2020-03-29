@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { PeriodBaseComponent } from "../period-base/period-base.component";
+import { PeriodBaseDirective } from "../../directives/period-base/period-base.directive";
 import { Params } from "@angular/router";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 import { intervalKey } from "../../lib/utils";
@@ -9,12 +9,16 @@ import { intervalKey } from "../../lib/utils";
 	templateUrl: "./custom-period.component.html",
 	styleUrls: ["./custom-period.component.css"],
 })
-export class CustomPeriodComponent extends PeriodBaseComponent {
+export class CustomPeriodComponent extends PeriodBaseDirective {
 	fromStr: NgbDate;
 	toStr: NgbDate;
 
 	from: Date;
 	to: Date;
+
+	get intervalKey() {
+		return intervalKey(this.from, this.to);
+	}
 
 	reload(): void {
 		const f = this.fromStr;
@@ -27,9 +31,5 @@ export class CustomPeriodComponent extends PeriodBaseComponent {
 
 	protected didReceiveParams(params: Params): void {
 		this.setUsername(params.username);
-	}
-
-	get intervalKey() {
-		return intervalKey(this.from, this.to);
 	}
 }
