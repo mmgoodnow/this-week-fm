@@ -1,19 +1,19 @@
 // import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 //
-// import { PeriodBaseComponent } from "./period-base.component";
+// import { PeriodBaseDirective } from "./period-base.component";
 //
-// describe("PeriodBaseComponent", () => {
-// 	let component: PeriodBaseComponent;
-// 	let fixture: ComponentFixture<PeriodBaseComponent>;
+// describe("PeriodBaseDirective", () => {
+// 	let component: PeriodBaseDirective;
+// 	let fixture: ComponentFixture<PeriodBaseDirective>;
 //
 // 	beforeEach(async(() => {
 // 		TestBed.configureTestingModule({
-// 			declarations: [PeriodBaseComponent],
+// 			declarations: [PeriodBaseDirective],
 // 		}).compileComponents();
 // 	}));
 //
 // 	beforeEach(() => {
-// 		fixture = TestBed.createComponent(PeriodBaseComponent);
+// 		fixture = TestBed.createComponent(PeriodBaseDirective);
 // 		component = fixture.componentInstance;
 // 		fixture.detectChanges();
 // 	});

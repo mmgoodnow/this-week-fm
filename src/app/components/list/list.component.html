@@ -6,18 +6,18 @@
 				| sort: intervalKey as friends;
 			index as i
 		"
-		class="list-group-item"
 		[ngClass]="{ 'text-muted': !f.doesShowPublicData }"
+		class="list-group-item"
 	>
 		<div class="flex-cont d-flex flex-column">
 			<div class="title mb-1 d-flex flex-row">
 				<div class="flex-shrink-0 mr-1">
 					{{ i + 1 }}.
 					<a
-						routerLink="/user/{{ f.username }}"
-						class="username"
 						[ngClass]="{ 'text-muted': !f.doesShowPublicData }"
 						[ngbTooltip]="f.doesShowPublicData ? null : notPublic"
+						class="username"
+						routerLink="/user/{{ f.username }}"
 					>
 						{{ f.username }}
 					</a>
@@ -25,7 +25,7 @@
 				<div class="flex-shrink-1 ellipsis mr-1">
 					<span *ngIf="f.currentTrack">
 						<span ngbTooltip="Currently listening">
-							<fa name="play-circle"></fa>
+							<fa-icon [icon]="faPlayCircle"></fa-icon>
 						</span>
 						{{ f.currentTrack | track }}
 					</span>
@@ -62,25 +62,25 @@
 <ng-template #conciseView>
 	<ul class="list-group">
 		<li
-			class="list-group-item"
 			*ngFor="
 				let f of friendsService.friends
 					| async
 					| sort: intervalKey as friends;
 				index as i
 			"
+			class="list-group-item"
 		>
 			<div class="flex-cont d-flex flex-column">
 				<div class="title mb-1 d-flex flex-row">
 					<div class="flex-shrink-0 mr-1">
 						{{ i + 1 }}.
 						<a
-							routerLink="/user/{{ f.username }}"
-							class="username"
 							[ngClass]="{ 'text-muted': !f.doesShowPublicData }"
 							[ngbTooltip]="
 								f.doesShowPublicData ? null : notPublic
 							"
+							class="username"
+							routerLink="/user/{{ f.username }}"
 						>
 							{{ f.username }}
 						</a>
@@ -88,7 +88,7 @@
 					<div class="flex-shrink-1 ellipsis mr-1">
 						<span *ngIf="f.currentTrack">
 							<span ngbTooltip="Currently listening">
-								<fa name="play-circle"></fa>
+								<fa-icon [icon]="faPlayCircle"></fa-icon>
 							</span>
 							{{ f.currentTrack | track }}
 						</span>

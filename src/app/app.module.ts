@@ -6,7 +6,6 @@ import { routing } from "./app.routing";
 import { FormsModule } from "@angular/forms";
 import { TableComponent } from "./components/table/table.component";
 import { ListComponent } from "./components/list/list.component";
-import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CsvComponent } from "./components/csv/csv.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
@@ -27,6 +26,7 @@ import { TracksBehindPipe } from "./pipes/tracks-behind.pipe";
 import { TrackPipe } from "./pipes/track.pipe";
 import { LastTrackPipe } from "./pipes/last-track.pipe";
 import { RelativeDatePipe } from "./pipes/relative-date.pipe";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
 	declarations: [
@@ -56,11 +56,11 @@ import { RelativeDatePipe } from "./pipes/relative-date.pipe";
 		HttpClientModule,
 		FormsModule,
 		routing,
-		AngularFontAwesomeModule,
 		NgbModule,
 		ServiceWorkerModule.register("ngsw-worker.js", {
 			enabled: environment.production,
 		}),
+		FontAwesomeModule,
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -1,15 +1,15 @@
-import { Injectable, OnDestroy, OnInit } from "@angular/core";
+import { Directive, Injectable, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { MainComponent } from "../main/main.component";
+import { MainComponent } from "../../components/main/main.component";
 import { FriendsService } from "../../services/friends.service";
 import { UserService } from "../../services/user.service";
 
+@Directive()
 @Injectable()
-export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
-	private subscriptions: Subscription;
-
+export abstract class PeriodBaseDirective implements OnInit, OnDestroy {
 	timeframe: string;
+	private subscriptions: Subscription;
 
 	constructor(
 		private router: Router,
@@ -35,6 +35,12 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 		this.subscriptions.unsubscribe();
 	}
 
+	abstract reload(): void;
+
+	loadUsers(from: Date, to: Date): void {
+		this.friendsService.update(from, to);
+	}
+
 	protected setUsername(username: string): void {
 		this.userService.next(username);
 	}
@@ -44,11 +50,5 @@ export abstract class PeriodBaseComponent implements OnInit, OnDestroy {
 		this.setUsername(username);
 		if (timeframe) this.timeframe = timeframe;
 		this.reload();
-	}
-
-	abstract reload(): void;
-
-	loadUsers(from: Date, to: Date): void {
-		this.friendsService.update(from, to);
 	}
 }

@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { FriendsService } from "../../services/friends.service";
 import { intervalKey } from "../../lib/utils";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
 	selector: "app-list",
@@ -16,6 +17,8 @@ export class ListComponent {
 
 	@Input()
 	to: Date;
+
+	faPlayCircle = faPlayCircle;
 
 	constructor(public friendsService: FriendsService) {}
 
