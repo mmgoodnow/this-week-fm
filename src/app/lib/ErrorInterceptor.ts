@@ -12,6 +12,7 @@ import { catchError } from "rxjs/operators";
 import { instanceOfLastFmError } from "../models/LastResponses";
 import { errorCodeToString } from "./transformations";
 import { statusCodeStartsWith } from "./utils";
+import { USER_NOT_FOUND } from "./constants";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -20,12 +21,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 	}
 
 	handleError(error: HttpErrorResponse, caught: Observable<any>) {
-		console.log(error, caught);
+		console.error(error, caught);
 
 		if (
 			statusCodeStartsWith(error.status, 4) &&
 			instanceOfLastFmError(error.error) &&
-			[6].includes(error.error.error)
+			[6].includes(error.error.error) &&
+			[USER_NOT_FOUND].includes(error.error.message)
 		) {
 			this.router.navigate(["/home"], {
 				queryParams: { error: errorCodeToString(error.error) },

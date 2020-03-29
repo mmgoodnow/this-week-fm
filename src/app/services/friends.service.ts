@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LastService } from "./last.service";
-import { BehaviorSubject, from as fromArray, Observable } from "rxjs";
+import { BehaviorSubject, from as fromArray, Observable, of } from "rxjs";
 import { catchError, first, map, mergeMap } from "rxjs/operators";
 import {
 	handleUserTracksError,
@@ -11,6 +11,7 @@ import {
 import Friend from "../models/Friend.model";
 import { intervalKey, partial } from "../lib/utils";
 import { UserService } from "./user.service";
+import { NO_SUCH_PAGE } from "../lib/constants";
 
 @Injectable({
 	providedIn: "root",
@@ -49,18 +50,6 @@ export class FriendsService {
 			});
 	}
 
-	private getTracks(
-		friend: Friend,
-		from: Date,
-		to: Date
-	): Observable<Friend> {
-		const key = intervalKey(from, to);
-		return this.lastService.getTracks(friend.username, from, to).pipe(
-			map(partial(hydrateUserTracks, friend, key)),
-			catchError(partial(handleUserTracksError, friend))
-		);
-	}
-
 	getFriends(username): void {
 		const addUsername = (usernames: string[]) => {
 			usernames.push(username);
@@ -71,9 +60,30 @@ export class FriendsService {
 			.getFriends(username)
 			.pipe(
 				map(lastFriendsToUsernames),
+				catchError(error => {
+					if (
+						error.error.error === 6 &&
+						error.error.message === NO_SUCH_PAGE
+					) {
+						return of([]);
+					}
+					throw error;
+				}),
 				map(addUsername),
 				map(usernamesToFriends)
 			)
 			.subscribe(this.friends.next);
+	}
+
+	private getTracks(
+		friend: Friend,
+		from: Date,
+		to: Date
+	): Observable<Friend> {
+		const key = intervalKey(from, to);
+		return this.lastService.getTracks(friend.username, from, to).pipe(
+			map(partial(hydrateUserTracks, friend, key)),
+			catchError(partial(handleUserTracksError, friend))
+		);
 	}
 }
