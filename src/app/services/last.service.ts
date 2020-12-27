@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { API_KEY, API_URL } from "../lib/constants";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { catchError, retry } from "rxjs/operators";
+import { retry } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root",

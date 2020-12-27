@@ -1,4 +1,4 @@
-import { BrowserModule } from "@angular/platform-browser";
+import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppComponent } from "./components/app/app.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -64,6 +64,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 	],
 	providers: [
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+		Title,
 	],
 	bootstrap: [AppComponent],
 })
