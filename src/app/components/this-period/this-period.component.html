@@ -1,9 +1,10 @@
 <div class="d-flex flex-column max-30">
+	<h1 class="h3">{{ pageTitle }}</h1>
 	<span class="d-flex flex-row">
-		<button class="btn btn-sm btn-primary ellipsis mr-1" (click)="reload()">
+		<button (click)="reload()" class="btn btn-sm btn-primary ellipsis mr-1">
 			Updated {{ lastUpdated }}
 		</button>
-		<button class="btn btn-sm btn-secondary" (click)="concise = !concise">
+		<button (click)="concise = !concise" class="btn btn-sm btn-secondary">
 			{{ concise ? "Expand" : "Collapse" }}
 		</button>
 	</span>

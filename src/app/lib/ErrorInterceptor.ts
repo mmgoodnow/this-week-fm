@@ -29,7 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 			[6].includes(error.error.error) &&
 			[USER_NOT_FOUND].includes(error.error.message)
 		) {
-			this.router.navigate(["/home"], {
+			this.router.navigate(["/login"], {
 				queryParams: { error: errorCodeToString(error.error) },
 			});
 		}

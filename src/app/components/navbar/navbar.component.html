@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div class="container">
-		<a class="navbar-brand" routerLink="/home">this-week</a>
+		<a class="navbar-brand" routerLink="/login">this-week</a>
 		<button
+			(click)="isCollapsed = !isCollapsed"
 			class="navbar-toggler navbar-toggler-right"
 			type="button"
-			(click)="isCollapsed = !isCollapsed"
 		>
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -12,70 +12,70 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
 					<a
-						class="nav-link"
 						(click)="isCollapsed = true"
-						routerLinkActive="active"
+						class="nav-link"
 						routerLink="this/week"
+						routerLinkActive="active"
 					>
 						this.week
 					</a>
 				</li>
 				<li class="nav-item">
 					<a
-						class="nav-link"
 						(click)="isCollapsed = true"
-						routerLinkActive="active"
+						class="nav-link"
 						routerLink="last/week"
+						routerLinkActive="active"
 					>
 						last.week
 					</a>
 				</li>
 				<li class="nav-item">
 					<a
-						class="nav-link"
 						(click)="isCollapsed = true"
-						routerLinkActive="active"
+						class="nav-link"
 						routerLink="this/month"
+						routerLinkActive="active"
 					>
 						this.month
 					</a>
 				</li>
 				<li class="nav-item">
 					<a
-						class="nav-link"
 						(click)="isCollapsed = true"
-						routerLinkActive="active"
+						class="nav-link"
 						routerLink="last/month"
+						routerLinkActive="active"
 					>
 						last.month
 					</a>
 				</li>
 				<li class="nav-item">
 					<a
-						class="nav-link"
 						(click)="isCollapsed = true"
-						routerLinkActive="active"
+						class="nav-link"
 						routerLink="this/year"
+						routerLinkActive="active"
 					>
 						this.year
 					</a>
 				</li>
 				<li class="nav-item">
 					<a
-						class="nav-link"
 						(click)="isCollapsed = true"
-						routerLinkActive="active"
+						class="nav-link"
 						routerLink="last/year"
+						routerLinkActive="active"
 					>
 						last.year
 					</a>
 				</li>
 				<li class="nav-item">
 					<a
-						class="nav-link"
 						(click)="isCollapsed = true"
-						routerLinkActive="active"
+						class="nav-link"
 						routerLink="custom"
+						routerLinkActive="active"
 					>
 						Custom
 					</a>

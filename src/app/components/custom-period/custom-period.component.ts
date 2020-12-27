@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { PeriodBaseDirective } from "../../directives/period-base/period-base.directive";
-import { Params } from "@angular/router";
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap";
 import { intervalKey } from "../../lib/utils";
+import { Params } from "@angular/router";
 
 @Component({
 	selector: "app-custom-period",
