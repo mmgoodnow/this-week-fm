@@ -5,11 +5,11 @@ import { FriendsService } from "../../services/friends.service";
 import { Title } from "@angular/platform-browser";
 
 @Component({
-	selector: "app-home",
-	templateUrl: "./home.component.html",
-	styleUrls: ["./home.component.css"],
+	selector: "app-login",
+	templateUrl: "./login.component.html",
+	styleUrls: ["./login.component.css"],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
 	username: string;
 	error: string;
 	subscription: Subscription;
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.subscription = this.route.queryParams.subscribe(this.retrieveMsg);
-		this.titleService.setTitle("this.week | Home");
+		this.titleService.setTitle("this.week | Login");
 	}
 
 	ngOnDestroy(): void {
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	retrieveMsg(params: Params): void {
 		if (params.error) {
 			this.error = params.error;
-			this.router.navigate(["home"]);
+			this.router.navigate(["login"]);
 		}
 	}
 

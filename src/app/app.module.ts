@@ -1,7 +1,7 @@
 import { BrowserModule, Title } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppComponent } from "./components/app/app.component";
-import { HomeComponent } from "./components/home/home.component";
+import { LoginComponent } from "./components/login/login.component";
 import { routing } from "./app.routing";
 import { FormsModule } from "@angular/forms";
 import { TableComponent } from "./components/table/table.component";
@@ -31,7 +31,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 @NgModule({
 	declarations: [
 		AppComponent,
-		HomeComponent,
+		LoginComponent,
 		TableComponent,
 		ListComponent,
 		CsvComponent,
