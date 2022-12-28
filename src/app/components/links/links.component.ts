@@ -1,10 +1,9 @@
 import { Component, Input } from "@angular/core";
 import {
-	LAST_FM_USER_URL,
 	EXPLR_FM_USER_URL,
-	SERGEI_USER_URL,
-	LAST_MILESTONES_USER_URL,
+	LAST_FM_USER_URL,
 	SCATTER_FM_USER_URL,
+	SERGEI_USER_URL,
 } from "src/app/lib/constants";
 
 @Component({
@@ -19,6 +18,5 @@ export class LinksComponent {
 	LAST_FM_USER_URL: string = LAST_FM_USER_URL;
 	EXPLR_FM_USER_URL: string = EXPLR_FM_USER_URL;
 	SERGEI_USER_URL: string = SERGEI_USER_URL;
-	LAST_MILESTONES_USER_URL: string = LAST_MILESTONES_USER_URL;
 	SCATTER_FM_USER_URL: string = SCATTER_FM_USER_URL;
 }
